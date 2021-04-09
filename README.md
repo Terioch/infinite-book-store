@@ -1,3 +1,9 @@
+# Infinite Book Store
+A book store built in React using NextJS, Shopify and Semantic-ui. 
+
+## General Information
+Products are fetched using the Shopify Storefront API.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
