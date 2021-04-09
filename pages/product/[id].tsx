@@ -1,29 +1,21 @@
 import { useState } from 'react';
 import { client } from "../../utils/shopify";
 import { Product } from '../../components/Shop';
-import { 
-  Segment, 
-  Card, 
-  Image, 
-  Grid,
-  List,
-  Header,
-  Icon,
-  Input
-} from "semantic-ui-react";
+import { Segment, Card, Grid } from "semantic-ui-react";
+import Components from "../../components/Components";
 import productStyles from "../../styles/product.module.css";
 
 const { Row, Column } = Grid;
-const { Content } = Card;
 
 interface Props {
   product: Product;
 }
 
 const product: React.FC<Props> = ({ product }) => {
-  const { title, images, description, variants } = product;
+  const { ProductImageColumn, ProductInfoColumn } = Components;
+  const { images, variants } = product;
   const [image, setImage] = useState<string>(images[0].src);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number | string>(1);
 
   // Implement product checkout
   const addToCart = async () => {
@@ -44,7 +36,12 @@ const product: React.FC<Props> = ({ product }) => {
     }]);
 
     sessionStorage.setItem("cart", JSON.stringify(cart));
-    console.log(cart);
+  }
+
+  // Update quantity on input change
+  const updateQuantity = (e: any) => {
+    const value = parseInt(e.target.value);
+    setQuantity(value ? value : "");
   }
 
   return (
@@ -52,59 +49,20 @@ const product: React.FC<Props> = ({ product }) => {
       <Grid container centered stackable>
         <Row columns={2}>
           <Column width={10}>
-            <Row>
-              <Image src={image} fluid />
-            </Row>
-            <Row>
-              <List horizontal divided style={{ marginTop: "1rem" }}>
-                {product.images.map(image => (
-                  <List.Item key={image.id}>
-                    <Image 
-                      size={"small"} 
-                      src={image.src}
-                      onClick={() => setImage(image.src)}
-                    />
-                  </List.Item>
-                ))}
-              </List>
-            </Row>
+            <ProductImageColumn 
+              product={product} 
+              image={image}
+              setImage={setImage}
+            />
           </Column>
           <Column width={6}>
             <Row>
-              <Card fluid color="teal">
-                <Content>
-                  <Header as="h2">{title}</Header>
-                </Content>
-                <Content>
-                  {description}
-                </Content>
-              </Card>
-              <Card 
-                className={productStyles.checkout} 
-                onClick={() => addToCart()}
-                raised
-              >
-                <Content>
-                  <List link relaxed>
-                    <List.Item>
-                      <Header>
-                        Add To Cart
-                        <Icon 
-                          name="add to cart" 
-                          color="teal" 
-                          style={{ marginLeft: ".5rem" }}
-                        />
-                      </Header>
-                      <Header>£{variants[0].price}</Header>
-                    </List.Item>
-                  </List>
-                </Content>
-              </Card>
-              <Input 
-                label="Quantity"
-                type="number" 
-                value={quantity}
-                onChange={(e: any) => setQuantity(e.target.value)}
+              <ProductInfoColumn 
+                product={product}
+                productStyles={productStyles}
+                quantity={quantity}
+                updateQuantity={updateQuantity}
+                addToCart={addToCart}
               />
             </Row>
           </Column>
