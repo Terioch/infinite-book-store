@@ -1,4 +1,4 @@
-.checkout:hover {
-  background-color: #EAECEE;
+div.ui.card > .content, .ui.cards > .card > .content, .checkout:hover {
+  background-color: #EAECEE!important;
   cursor: pointer;
 }

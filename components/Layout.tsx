@@ -1,26 +1,28 @@
 import React from 'react';
-import { Container } from "semantic-ui-react";
+import { } from "semantic-ui-react";
 import Components from "./Components";
+import layoutStyles from "../styles/Layout.module.css";
 
 const Layout: React.FC = ({ children }) => {
+  const { main, container } = layoutStyles;
   const { Meta, Nav, Footer } = Components;
   const { title, description, keywords } = metaData;
 
   return (
-    <React.Fragment>
+    <>
       <Meta 
         title={title} 
         description={description}
         keywords={keywords}
       />
-      <main>
+      <main className={main}>
         <Nav />
-        <Container>
+        <div className={container}>
           {children}
-        </Container>
+        </div>
         <Footer />
       </main>
-    </React.Fragment>
+    </>
   );
 }
 

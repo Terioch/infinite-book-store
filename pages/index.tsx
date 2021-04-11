@@ -8,9 +8,9 @@ export default function Home({ products }) {
   const { Shop } = Components;
 
   return (
-    <React.Fragment>
+    <>
       <Shop products={products} />
-    </React.Fragment>
+    </>
   );
 }
 

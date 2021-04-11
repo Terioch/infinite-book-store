@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React from "react";
 import { Product } from "./Shop";
 import { Card, Header, List, Input, Icon } from "semantic-ui-react";
 
@@ -10,7 +10,7 @@ interface Props {
   product: Product;
   productStyles: ProductStyles;
   quantity: number | string;
-  updateQuantity: (e: any) => void;
+  handleQuantity: (e: any) => void;
   addToCart: () => Promise<void>;
 }
 
@@ -20,7 +20,7 @@ const ProductInfoColumn: React.FC<Props> = ({
   product, 
   productStyles,
   quantity,
-  updateQuantity,
+  handleQuantity,
   addToCart
 }) => {
   const { title, description, variants } = product;
@@ -60,7 +60,7 @@ const ProductInfoColumn: React.FC<Props> = ({
         label="Quantity"
         type="number" 
         value={quantity}
-        onChange={(e: any) => updateQuantity(e)}
+        onChange={(e: any) => handleQuantity(e)}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { client } from "../../utils/shopify";
 import { Product } from '../../components/Shop';
-import { Segment, Card, Grid } from "semantic-ui-react";
+import { Segment, Grid } from "semantic-ui-react";
 import Components from "../../components/Components";
 import productStyles from "../../styles/product.module.css";
 
@@ -39,7 +39,7 @@ const product: React.FC<Props> = ({ product }) => {
   }
 
   // Update quantity on input change
-  const updateQuantity = (e: any) => {
+  const handleQuantity = (e: any) => {
     const value = parseInt(e.target.value);
     setQuantity(value ? value : "");
   }
@@ -61,7 +61,7 @@ const product: React.FC<Props> = ({ product }) => {
                 product={product}
                 productStyles={productStyles}
                 quantity={quantity}
-                updateQuantity={updateQuantity}
+                handleQuantity={handleQuantity}
                 addToCart={addToCart}
               />
             </Row>
