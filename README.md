@@ -2,7 +2,7 @@
 A book store built in React using NextJS, Shopify and Semantic-ui. 
 
 ## General Information
-Products are fetched using the Shopify Storefront API.
+Products are fetched through the Shopify Storefront API using the Javascript-Buy-SDK library.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
