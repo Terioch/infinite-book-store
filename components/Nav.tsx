@@ -20,7 +20,10 @@ const Nav: React.FC<MenuItemProps> = () => {
         inverted
       >
         <Item>
-          <Header className={title} as="h1">Infinite Book Store</Header>
+          <Header className={title} as="h1" color="blue">
+            Infinite Book Store
+            <Icon name="bolt" color="grey" />
+          </Header>
         </Item>
         <Item className={rightMenu}>
           <Item>
@@ -38,7 +41,7 @@ const Nav: React.FC<MenuItemProps> = () => {
             </Link>
           </Item>
           <Item fitted="horizontally">
-            <Link href="/contact">
+            <Link href="/login">
               <Button inverted color="grey">Sign In</Button>
             </Link>
           </Item>

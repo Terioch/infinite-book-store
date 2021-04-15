@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <Link href="/">
           <Menu.Item as="a">Shop</Menu.Item>
         </Link>
-        <Link href="/contact">
+        <Link href="/login">
           <Menu.Item as="a">Sign In</Menu.Item>
         </Link>
         <Menu.Item 

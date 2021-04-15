@@ -59,6 +59,7 @@ const ProductInfoColumn: React.FC<Props> = ({
       <Input 
         label="Quantity"
         type="number" 
+        placeholder="Set to 1 if empty..."
         value={quantity}
         onChange={(e: any) => handleQuantity(e)}
       />

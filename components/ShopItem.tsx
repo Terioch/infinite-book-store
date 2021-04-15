@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+// import Image from "next/image";
 import { Header, Card, Image } from "semantic-ui-react";
 import { Product } from "./Shop";
+import shopStyles from "../styles/shop.module.css";
 
 interface Props {
   product: Product;
@@ -15,9 +17,9 @@ const ShopItem: React.FC<Props> = ({ product }) => {
       <Card color="blue">
         <Card.Content style={{padding: "0"}}>
           <Image 
-            style={{ height: "100%" }}
+            className={shopStyles.image}
             src={images[0].src} 
-            fluid 
+            fluid
           />
         </Card.Content>
         <Card.Content>

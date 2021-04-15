@@ -1,5 +1,5 @@
 import React from 'react';
-import { } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import Components from "./Components";
 import layoutStyles from "../styles/Layout.module.css";
 
@@ -17,9 +17,9 @@ const Layout: React.FC = ({ children }) => {
       />
       <main className={main}>
         <Nav />
-        <div className={container}>
+        <Container>
           {children}
-        </div>
+        </Container>
         <Footer />
       </main>
     </>

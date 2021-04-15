@@ -1,11 +1,14 @@
-import 'semantic-ui-css/semantic.min.css'
+import { AuthProvider } from "../auth/auth";
 import Layout from "../components/Layout";
+import 'semantic-ui-css/semantic.min.css'
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </Layout>
   );
 }

@@ -1,4 +1,4 @@
-import { SetStateAction, Dispatch } from 'react';
+import { SetStateAction, Dispatch, useEffect } from 'react';
 import { Product } from './Shop';
 import { Grid, List, Image } from "semantic-ui-react";
 
@@ -23,6 +23,7 @@ const ProductImageColumn: React.FC<Props> = ({ product, image, setImage }) => {
           {product.images.map(image => (
             <List.Item key={image.id}>
               <Image 
+                id="image"
                 size={"small"} 
                 src={image.src}
                 onClick={() => setImage(image.src)}
