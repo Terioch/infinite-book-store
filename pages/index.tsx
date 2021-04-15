@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { client } from "../utils/shopify";
 import {  } from "semantic-ui-react";
 import Components from "../components/Components";
@@ -6,6 +6,10 @@ import styles from '../styles/Home.module.css';
 
 export default function Home({ products }) {
   const { Shop } = Components;
+
+  useEffect(() => {
+    document.querySelector('body').classList.add(styles.body);
+  });
 
   return (
     <>

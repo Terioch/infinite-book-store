@@ -6,7 +6,7 @@ import { useAuth } from "../auth/auth";
 import { 
   Form, 
   Header, 
-  Segment, 
+  Card,
   Checkbox, 
   Button, 
   Container, 
@@ -32,6 +32,7 @@ const contact: React.FC = () => {
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
     password: "",
     terms: false
   });
@@ -63,86 +64,98 @@ const contact: React.FC = () => {
 
   return (
     <Container className={loginStyles.container}>
-      <Segment raised secondary>
-        <Form error={isFormValid}>
-          <Header 
-            as="h1" 
-            textAlign="center" 
-            style={{ textDecoration: "underline" }}
-          >
-            Sign In
-          </Header>
-          <Group widths="equal">
-            <Input 
-              label="First Name"
-              placeholder="First Name" 
-              name="firstName"
-              value={values.firstName}
-              onChange={(e, data) => handleInputChange(e, data)}
-            />
-            <Message
-              error
-              content='You can only sign up for an account once with a given e-mail address.'
-            />
-            <Input
-              label="Last Name" 
-              placeholder="Last Name" 
-              name="lastName"
-              value={values.lastName}
-              onChange={(e, data) => handleInputChange(e, data)}
-            />
-            <Message
-              error
-              content='You can only sign up for an account once with a given e-mail address.'
-            />
-          </Group>
-            <Input 
-              label="Email" 
-              placeholder="Email" 
-              name="email"
-              value={values.email}
-              error
-              onChange={(e, data) => handleInputChange(e, data)}            
-            />
-            <Message
-              error
-              content='You can only sign up for an account once with a given e-mail address.'
-            />
-            <Input 
-              label="Password" 
-              placeholder="Password" 
-              name="password"
-              value={values.password}
-              onChange={(e, data) => handleInputChange(e, data)}
-            />
-            <Message
-              error
-              content='You can only sign up for an account once with a given e-mail address.'
-            />
-          <Field>
-            <Checkbox 
-              label="I agree to the Terms and Conditions" 
-              name="terms"
-              checked={values.terms}
-              onChange={(e, data) => handleInputChange(e, data)}
-            />
-            <Message
-              error
-              content='You can only sign up for an account once with a given e-mail address.'
-            />
-          </Field>
-          <Container textAlign="center">
-            <Button 
-              type="submit" 
-              size="large" 
-              color="blue"
-              onClick={handleSubmit}
+      <Card raised fluid>
+        <Card.Content>
+          <Form error={isFormValid}>
+            <Header 
+              as="h1" 
+              textAlign="center" 
+              style={{ textDecoration: "underline" }}
             >
-              Login
-            </Button>
-          </Container>
-        </Form>
-      </Segment>
+              Sign In
+            </Header>
+            <Group widths="equal">
+              <Input 
+                label="First Name"
+                placeholder="First Name..." 
+                name="firstName"
+                value={values.firstName}
+                onChange={(e, data) => handleInputChange(e, data)}
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+              <Input
+                label="Last Name" 
+                placeholder="Last Name..." 
+                name="lastName"
+                value={values.lastName}
+                onChange={(e, data) => handleInputChange(e, data)}
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+            </Group>
+              <Input 
+                label="Email" 
+                placeholder="Email..." 
+                name="email"
+                value={values.email}
+                onChange={(e, data) => handleInputChange(e, data)}            
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+              <Input
+                label="Phone Number" 
+                placeholder="Phone Number..." 
+                name="phoneNumber"
+                value={values.phoneNumber}
+                onChange={(e, data) => handleInputChange(e, data)}
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+              <Input 
+                label="Password" 
+                placeholder="Password..." 
+                name="password"
+                value={values.password}
+                onChange={(e, data) => handleInputChange(e, data)}
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+            <Field>
+              <Checkbox 
+                label="I agree to the Terms and Conditions" 
+                name="terms"
+                checked={values.terms}
+                onChange={(e, data) => handleInputChange(e, data)}
+              />
+              <Message
+                error
+                content='You can only sign up for an account once with a given e-mail address.'
+              />
+            </Field>
+            <Container textAlign="center">
+              <Button 
+                type="submit" 
+                size="large" 
+                color="blue"
+                onClick={handleSubmit}
+              >
+                Login
+              </Button>
+            </Container>
+          </Form>
+        </Card.Content>
+      </Card>
     </Container>
   );
 }

@@ -1,12 +1,12 @@
 const firebase = require("firebase");
 
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDKv-etDy3nJlHHgrr-EdkCimLAUnSiIFo",
-  authDomain: "book-store-d9e12.firebaseapp.com",
-  projectId: "book-store-d9e12",
-  storageBucket: "book-store-d9e12.appspot.com",
-  messagingSenderId: "856100238725",
-  appId: "1:856100238725:web:a2d53fea0ab1b88cf700ec"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID
 }
 
 export default function firebaseClient() {

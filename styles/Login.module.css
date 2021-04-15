@@ -1,12 +1,13 @@
 .container {
-  /* height: calc(100vh - 250px); */
-  /* display: flex!important;
+  /* height: calc(100vh - 250px);
+  display: flex!important;
   align-items: center; */
+  /* height: clamp(calc(100vh - 324px), calc(100vh - 250px), 100vh); */
 }
 
 @media only screen and (max-width: 768px) {
   .container {
-    /* height: calc(100vh - 324px); */
-    /* display: block!important; */
+    /* height: calc(100vh - 324px);
+    display: block!important; */
   }
 }
