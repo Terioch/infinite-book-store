@@ -1,0 +1,41 @@
+[33mcommit 17c3d794f3b657137cba6f5f6add51fb880c74b5[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Rio <riostockton@gmail.com>
+Date:   Thu Apr 15 18:25:09 2021 +0100
+
+    added encryption
+
+[33mcommit 78e25e7ffab5937030b387c20ae80967f53bb4b5[m
+Author: Rio <riostockton@gmail.com>
+Date:   Thu Apr 15 15:56:04 2021 +0100
+
+    initial commit
+
+[33mcommit 2b24b8c40232a2a337af230f6716c818398baa2a[m
+Author: Rio <riostockton@gmail.com>
+Date:   Sun Apr 11 10:54:08 2021 +0100
+
+    Updated Readme
+
+[33mcommit d9c84729ee5555228953c43a84ab0fe1bf03b823[m
+Author: Rio <riostockton@gmail.com>
+Date:   Sun Apr 11 10:50:35 2021 +0100
+
+    Added contact form and made other refactors
+
+[33mcommit 5ee528bf6a34ce9060b4b3d9972f0ce416cfabe0[m
+Author: Rio <riostockton@gmail.com>
+Date:   Fri Apr 9 18:33:55 2021 +0100
+
+    Modularized product page into separate column components
+
+[33mcommit 79068eadbca615b644e8c3a002c5f59a4dcc7153[m
+Author: Rio <riostockton@gmail.com>
+Date:   Fri Apr 9 16:41:38 2021 +0100
+
+    initial commit
+
+[33mcommit 9bc44dced820662b4220bc18944594a0f588d429[m
+Author: Rio <riostockton@gmail.com>
+Date:   Tue Mar 30 14:17:42 2021 +0100
+
+    Initial commit from Create Next App
