@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import nookies from "nookies";
 import firebaseClient from "./firebaseClient";
 import firebase from "firebase/app";

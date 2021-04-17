@@ -10,13 +10,21 @@ import {
   Checkbox, 
   Button, 
   Container, 
-  Message,
   InputOnChangeData,
   CheckboxProps
 } from "semantic-ui-react";
 import loginStyles from "../styles/Login.module.css";
 
 const { Group, Input, Field } = Form;
+
+interface Values {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  terms: boolean;
+}
 
 type Event = ChangeEvent<HTMLInputElement> | FormEvent<HTMLInputElement>
 type Data = InputOnChangeData | CheckboxProps;
@@ -26,9 +34,8 @@ const contact: React.FC = () => {
 
   const { user } = useAuth();
 
-  // Initialize form values and form error validator
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [values, setValues] = useState({
+  // Initialize form values and error values
+  const [values, setValues] = useState<Values>({
     firstName: "",
     lastName: "",
     email: "",
@@ -36,11 +43,11 @@ const contact: React.FC = () => {
     password: "",
     terms: false
   });
+  const [errorValues, setErrorValues] = useState({ ...values });
 
   // Set new form values on input change
   const handleInputChange = (e: Event, data: Data) => {
     const { value, name } = data;
-    console.log(data);
 
     setValues({
       ...values,
@@ -48,16 +55,24 @@ const contact: React.FC = () => {
     });
   }
 
-  // Create new user with firebase authentication
-  const handleSubmit = async () => {
-    const { email, password } = values;
+  // Validate name, phone number and terms
+  const handleSubmit = () => {
+    const { firstName, email, phoneNumber, password, terms } = values;
+
+    // Set values within temporary values object to false
+    const temp = Object.keys(values).map(key => ({ [key]: false }));
+    console.log(temp);
+
+    handleFirebaseSubmit(email, password);
+  }
+
+  // Create new user with firebase authentication if email and password are valid
+  const handleFirebaseSubmit = async (email: string, password: string) => {
     await firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        setIsFormValid(false);
-        window.location.href = "/"
+        window.location.href = "/";
       }).catch(err => {
-        setIsFormValid(true);
         console.error(err.message);
       });
   }
@@ -66,7 +81,7 @@ const contact: React.FC = () => {
     <Container className={loginStyles.container}>
       <Card raised fluid>
         <Card.Content>
-          <Form error={isFormValid}>
+          <Form>
             <Header 
               as="h1" 
               textAlign="center" 
@@ -76,15 +91,12 @@ const contact: React.FC = () => {
             </Header>
             <Group widths="equal">
               <Input 
-                label="First Name"
+                label="First Name*"
                 placeholder="First Name..." 
                 name="firstName"
                 value={values.firstName}
+                error={errorValues.firstName}
                 onChange={(e, data) => handleInputChange(e, data)}
-              />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
               />
               <Input
                 label="Last Name" 
@@ -93,54 +105,39 @@ const contact: React.FC = () => {
                 value={values.lastName}
                 onChange={(e, data) => handleInputChange(e, data)}
               />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
-              />
             </Group>
               <Input 
-                label="Email" 
+                label="Email*" 
                 placeholder="Email..." 
                 name="email"
                 value={values.email}
+                error={errorValues.terms}
                 onChange={(e, data) => handleInputChange(e, data)}            
               />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
-              />
               <Input
-                label="Phone Number" 
+                label="Phone Number*" 
                 placeholder="Phone Number..." 
                 name="phoneNumber"
                 value={values.phoneNumber}
+                //error={errorValues.phoneNumber}
                 onChange={(e, data) => handleInputChange(e, data)}
-              />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
               />
               <Input 
-                label="Password" 
-                placeholder="Password..." 
+                label="Password*" 
+                placeholder="Password..."
+                type="password" 
                 name="password"
                 value={values.password}
+                //error={errorValues.password}
                 onChange={(e, data) => handleInputChange(e, data)}
-              />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
               />
             <Field>
               <Checkbox 
-                label="I agree to the Terms and Conditions" 
+                label="I agree to the Terms and Conditions*" 
                 name="terms"
                 checked={values.terms}
+                //error={errorValues.terms}
                 onChange={(e, data) => handleInputChange(e, data)}
-              />
-              <Message
-                error
-                content='You can only sign up for an account once with a given e-mail address.'
               />
             </Field>
             <Container textAlign="center">
