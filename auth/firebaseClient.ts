@@ -10,6 +10,7 @@ const FIREBASE_CONFIG = {
 }
 
 export default function firebaseClient() {
+  console.log(FIREBASE_CONFIG);
   const fb = firebase.default;
   if (!fb.apps.length) {
     fb.initializeApp(FIREBASE_CONFIG);
