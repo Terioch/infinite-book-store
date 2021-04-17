@@ -1,7 +1,7 @@
 const firebase = require("firebase");
 
 const FIREBASE_CONFIG = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyDKv-etDy3nJlHHgrr-EdkCimLAUnSiIFo",
   authDomain: process.env.AUTH_DOMAIN,
   projectId: process.env.PROJECT_ID,
   storageBucket: process.env.STORAGE_BUCKET,

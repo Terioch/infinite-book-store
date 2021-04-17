@@ -18,7 +18,7 @@ export default function Home({ products }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch all products from Shopify API
   const products = await client.product.fetchAll();
 

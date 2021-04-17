@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { client } from "../../utils/shopify";
 import { Product } from '../../components/Shop';
 import { Segment, Grid } from "semantic-ui-react";
@@ -72,7 +72,7 @@ const product: React.FC<Props> = ({ product }) => {
   );
 }
 
-export const getStaticProps = async (context: any) => {
+export const getServerSideProps = async (context: any) => {
   // Fetch single product from Shopify API
   const product = await client.product.fetch(context.params.id);
 
@@ -83,16 +83,16 @@ export const getStaticProps = async (context: any) => {
   }
 }
 
-export const getStaticPaths = async () => {
-  // Generate paths for each product by id
-  const products = await client.product.fetchAll();
-  const idList: Array<number> = products.map((p: any) => p.id);
-  const paths = idList.map(id => ({ params: { id: id.toString() } }));
+// export const getStaticPaths = async () => {
+//   // Generate paths for each product by id
+//   const products = await client.product.fetchAll();
+//   const idList: Array<number> = products.map((p: any) => p.id);
+//   const paths = idList.map(id => ({ params: { id: id.toString() } }));
 
-  return {
-    paths,
-    fallback: false
-  }
-}
+//   return {
+//     paths,
+//     fallback: false
+//   }
+// }
 
 export default product;
