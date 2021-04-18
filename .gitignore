@@ -36,4 +36,3 @@ yarn-error.log*
 # encryption
 .env.local
 /secrets.json
-/auth/firebaseClient.ts
