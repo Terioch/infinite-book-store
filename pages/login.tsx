@@ -10,6 +10,7 @@ import {
   Checkbox, 
   Button, 
   Container, 
+  Message,
   InputOnChangeData,
   CheckboxProps
 } from "semantic-ui-react";
@@ -21,7 +22,6 @@ interface Values {
   firstName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
   password: string;
   terms: boolean;
 }
@@ -29,59 +29,85 @@ interface Values {
 type Event = ChangeEvent<HTMLInputElement> | FormEvent<HTMLInputElement>
 type Data = InputOnChangeData | CheckboxProps;
 
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  terms: false
+};
+
 const contact: React.FC = () => {
   firebaseClient(); // Initialize firebase client
-
   const { user } = useAuth();
 
-  // Initialize form values and error values
-  const [values, setValues] = useState<Values>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    terms: false
-  });
-  const [errorValues, setErrorValues] = useState({ ...values });
+  // Initialize state variables
+  const [values, setValues] = useState<Values>(initialValues);
+  const [isFormInvalid, setIsFormInvalid] = useState(false);
+  const [errorList, setErrorList] = useState<Array<string>>([]);
 
   // Set new form values on input change
   const handleInputChange = (e: Event, data: Data) => {
-    const { value, name } = data;
+    const { value, checked, name } = data;
 
     setValues({
       ...values,
-      [name]: value
+      [name]: value || checked
     });
   }
 
   // Validate name, phone number and terms
-  const handleSubmit = () => {
-    const { firstName, email, phoneNumber, password, terms } = values;
+  const handleSubmit = async () => {
+    const { email, password } = values;
+    let temp = [];
 
-    // Set values within temporary values object to false
-    const temp = Object.keys(values).map(key => ({ [key]: false }));
-    console.log(temp);
+    // Authenticate fields by pushing any errors onto our temporary array
+    handleEmptyFields(temp);
+    await handleFirebaseSubmit(email, password, temp);
+    setErrorList(temp); // Set new error list
 
-    handleFirebaseSubmit(email, password);
+    // Conditionally set forms validation state
+    temp.length > 0 ? setIsFormInvalid(true) : setIsFormInvalid(false);
   }
 
   // Create new user with firebase authentication if email and password are valid
-  const handleFirebaseSubmit = async (email: string, password: string) => {
-    await firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        window.location.href = "/";
-      }).catch(err => {
-        console.error(err.message);
-      });
+  const handleFirebaseSubmit = async (
+    email: string, 
+    password: string, 
+    temp: Array<string>
+  ) => {
+    if (temp.length === 0) {
+      await firebase.auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          // Redirect logged in user to homescreen
+          return window.location.href = "/"; 
+        }).catch(err => {
+          console.error(err.message);
+          return temp.push(err.message);
+        });
+    }
+  }
+
+  const handleEmptyFields = (temp: Array<string>) => {
+    // Add an error message for empty required values
+    let requiredValues = ["firstName", "email", "password", "terms"];
+    let message: string;
+
+    for (let key of requiredValues) {
+      if (!values[key]) {
+        message = "Required Fields marked with a * must not be empty";
+        return temp.push(message);
+      }
+    }
+    return;
   }
 
   return (
     <Container className={loginStyles.container}>
       <Card raised fluid>
         <Card.Content>
-          <Form>
+          <Form error={isFormInvalid}>
             <Header 
               as="h1" 
               textAlign="center" 
@@ -95,7 +121,6 @@ const contact: React.FC = () => {
                 placeholder="First Name..." 
                 name="firstName"
                 value={values.firstName}
-                error={errorValues.firstName}
                 onChange={(e, data) => handleInputChange(e, data)}
               />
               <Input
@@ -111,16 +136,7 @@ const contact: React.FC = () => {
                 placeholder="Email..." 
                 name="email"
                 value={values.email}
-                error={errorValues.terms}
                 onChange={(e, data) => handleInputChange(e, data)}            
-              />
-              <Input
-                label="Phone Number*" 
-                placeholder="Phone Number..." 
-                name="phoneNumber"
-                value={values.phoneNumber}
-                //error={errorValues.phoneNumber}
-                onChange={(e, data) => handleInputChange(e, data)}
               />
               <Input 
                 label="Password*" 
@@ -128,7 +144,6 @@ const contact: React.FC = () => {
                 type="password" 
                 name="password"
                 value={values.password}
-                //error={errorValues.password}
                 onChange={(e, data) => handleInputChange(e, data)}
               />
             <Field>
@@ -136,10 +151,14 @@ const contact: React.FC = () => {
                 label="I agree to the Terms and Conditions*" 
                 name="terms"
                 checked={values.terms}
-                //error={errorValues.terms}
                 onChange={(e, data) => handleInputChange(e, data)}
               />
             </Field>
+            <Message 
+              error
+              header={`We encountered ${errorList.length > 1 ? 'some errors' : 'an error'} with your sign-in attempt`}
+              list={errorList}
+            />
             <Container textAlign="center">
               <Button 
                 type="submit" 
@@ -147,7 +166,7 @@ const contact: React.FC = () => {
                 color="blue"
                 onClick={handleSubmit}
               >
-                Login
+                Demo Auth
               </Button>
             </Container>
           </Form>

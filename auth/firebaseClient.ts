@@ -1,7 +1,7 @@
 const firebase = require("firebase");
 
 const FIREBASE_CONFIG = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.API_KEY, // Issue with processing of API key
   authDomain: process.env.AUTH_DOMAIN,
   projectId: process.env.PROJECT_ID,
   storageBucket: process.env.STORAGE_BUCKET,
@@ -10,7 +10,7 @@ const FIREBASE_CONFIG = {
 }
 
 export default function firebaseClient() {
-  console.log(FIREBASE_CONFIG);
+  // console.log(FIREBASE_CONFIG);
   const fb = firebase.default;
   if (!fb.apps.length) {
     fb.initializeApp(FIREBASE_CONFIG);
