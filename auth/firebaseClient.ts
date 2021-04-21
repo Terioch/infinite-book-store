@@ -1,7 +1,7 @@
 const firebase = require("firebase");
 
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDKv-etDy3nJlHHgrr-EdkCimLAUnSiIFo", // Issue with processing of API key
+  apiKey: process.env.API_KEY, // Issue with processing of API key
   authDomain: process.env.AUTH_DOMAIN,
   projectId: process.env.PROJECT_ID,
   storageBucket: process.env.STORAGE_BUCKET,
