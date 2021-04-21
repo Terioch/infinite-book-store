@@ -1,5 +1,11 @@
 .container {
   display: flex!important;
   align-items: center; 
-  /* height: clamp(calc(100vh - 324px), calc(100vh - 257px), 200vh); */
+  min-height: calc(100vh - 257px);
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    min-height: calc(100vh - 324px);
+  }
 }
