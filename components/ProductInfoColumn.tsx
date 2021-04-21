@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "./Shop";
+import { Product } from "../models/Product";
 import { Card, Header, List, Input, Icon } from "semantic-ui-react";
 
 interface ProductStyles {
@@ -9,7 +9,7 @@ interface ProductStyles {
 interface Props {
   product: Product;
   productStyles: ProductStyles;
-  quantity: number | string;
+  quantity: number;
   handleQuantity: (e: any) => void;
   addToCart: () => Promise<void>;
 }

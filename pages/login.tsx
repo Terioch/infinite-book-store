@@ -26,7 +26,8 @@ interface Values {
   terms: boolean;
 }
 
-type Event = ChangeEvent<HTMLInputElement> | FormEvent<HTMLInputElement>
+type T = HTMLInputElement;
+type Event = ChangeEvent<T> | FormEvent<T> | MouseEvent;
 type Data = InputOnChangeData | CheckboxProps;
 
 const initialValues = {
@@ -57,16 +58,17 @@ const contact: React.FC = () => {
   }
 
   // Validate name, phone number and terms
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    const authType = e.target.textContent;
     const { email, password } = values;
     let temp = [];
 
     // Authenticate fields by pushing any errors onto our temporary array
     handleEmptyFields(temp);
-    await handleFirebaseSubmit(email, password, temp);
+    await handleFirebaseSubmit(email, password, temp, authType);
     setErrorList(temp); // Set new error list
 
-    // Conditionally set forms validation state
+    // Conditionally set form validation state
     temp.length > 0 ? setIsFormInvalid(true) : setIsFormInvalid(false);
   }
 
@@ -74,18 +76,22 @@ const contact: React.FC = () => {
   const handleFirebaseSubmit = async (
     email: string, 
     password: string, 
-    temp: Array<string>
+    temp: Array<string>,
+    authType: string
   ) => {
     if (temp.length === 0) {
-      await firebase.auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          // Redirect logged in user to homescreen
-          return window.location.href = "/"; 
-        }).catch(err => {
-          console.error(err.message);
-          return temp.push(err.message);
-        });
+      // Conditionally login an existing user or create a new user
+      const auth = authType === "Login" 
+        ?
+        firebase.auth().
+        signInWithEmailAndPassword(email, password) 
+        : 
+        firebase.auth().
+        createUserWithEmailAndPassword(email, password);
+
+      // Redirect signed-in user to homepage or push an error message
+      await auth.then(() => window.location.href = "/")
+      .catch(err => temp.push(err.message));
     }
   }
 
@@ -164,10 +170,18 @@ const contact: React.FC = () => {
                 type="submit" 
                 size="large" 
                 color="blue"
-                onClick={handleSubmit}
+                onClick={(e) => handleSubmit(e)}
               >
-                Demo Auth
+                Create Account
               </Button>
+              <Button 
+                type="submit" 
+                size="large" 
+                color="black"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Login
+              </Button>         
             </Container>
           </Form>
         </Card.Content>
@@ -177,17 +191,3 @@ const contact: React.FC = () => {
 }
 
 export default contact;
-
-// Alternative form layout
-{/* <Field>
-  <label>First Name</label>
-  <input placeholder='First Name' />
-</Field>
-<Field>
-  <label>Last Name</label>
-  <input placeholder='Last Name' />
-</Field>
-<Field>
-  <label>Email</label>
-  <input placeholder='Email' />
-</Field> */}

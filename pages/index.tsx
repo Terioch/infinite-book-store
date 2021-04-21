@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { client } from "../utils/shopify";
-import {  } from "semantic-ui-react";
 import Components from "../components/Components";
 import styles from '../styles/Home.module.css';
 
@@ -18,7 +17,7 @@ export default function Home({ products }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch all products from Shopify API
   const products = await client.product.fetchAll();
 

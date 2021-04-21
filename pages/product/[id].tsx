@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { client } from "../../utils/shopify";
-import { Product } from '../../components/Shop';
+import { Product } from '../../models/Product';
 import { Segment, Grid } from "semantic-ui-react";
 import Components from "../../components/Components";
 import productStyles from "../../styles/product.module.css";
@@ -14,20 +14,21 @@ interface Props {
 const product: React.FC<Props> = ({ product }) => {
   const { ProductImageColumn, ProductInfoColumn } = Components;
   const { images, variants } = product;
-  const [image, setImage] = useState<string>(images[0].src);
-  const [quantity, setQuantity] = useState<number | string>(1);
+  const [image, setImage] = useState(images[0].src);
+  const [quantity, setQuantity] = useState(1);
 
   // Implement product checkout
   const addToCart = async () => {
     let checkoutId = sessionStorage.getItem("checkoutId");  
 
-    // Create new checkout if checkoutId was not fetched from local storage
+    // Create new checkout if checkoutId was not fetched from session storage
     if (!checkoutId) {
       const checkout = await client.checkout.create();
       checkoutId = checkout.id;
     }
 
-    sessionStorage.setItem("checkoutId", checkoutId); // Set item within local storage
+    // Set item within session storage
+    sessionStorage.setItem("checkoutId", checkoutId); 
 
     // Add line items to checkout cart
     const cart = await client.checkout.addLineItems(checkoutId, [{
@@ -72,9 +73,9 @@ const product: React.FC<Props> = ({ product }) => {
   );
 }
 
-export const getServerSideProps = async (context: any) => {
+export const getStaticProps = async ({ params: { id } }) => {
   // Fetch single product from Shopify API
-  const product = await client.product.fetch(context.params.id);
+  const product = await client.product.fetch(id);
 
   return {
     props: {
@@ -83,16 +84,16 @@ export const getServerSideProps = async (context: any) => {
   }
 }
 
-// export const getStaticPaths = async () => {
-//   // Generate paths for each product by id
-//   const products = await client.product.fetchAll();
-//   const idList: Array<number> = products.map((p: any) => p.id);
-//   const paths = idList.map(id => ({ params: { id: id.toString() } }));
+export const getStaticPaths = async () => {
+  // Generate paths for each product by id
+  const products = await client.product.fetchAll();
+  const idList: Array<number> = products.map((p: any) => p.id);
+  const paths = idList.map(id => ({ params: { id: id.toString() } }));
 
-//   return {
-//     paths,
-//     fallback: false
-//   }
-// }
+  return {
+    paths,
+    fallback: false
+  }
+}
 
 export default product;

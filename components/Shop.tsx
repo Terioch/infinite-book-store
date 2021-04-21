@@ -1,23 +1,7 @@
 import React from "react";
+import { Product } from "../models/Product";
 import { Card, Segment } from "semantic-ui-react";
 import Components from "./Components";
-
-interface Img {
-  id: string;
-  src: string;
-}
-
-interface Variant {
-  price: string;
-}
-
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  images: Array<Img>;
-  variants: Variant;
-}
 
 interface Props {
   products: Array<Product>
