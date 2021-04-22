@@ -34,5 +34,5 @@ yarn-error.log*
 .vercel
 
 # encryption
-.env.local
+.env
 /secrets.json
