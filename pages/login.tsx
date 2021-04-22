@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import firebase from "firebase/app"
 import firebaseClient from "../auth/firebaseClient";
 import "firebase/auth";
-import { useAuth } from "../auth/auth";
+import { useAuth } from "../auth/authContext";
 import { 
   Form, 
   Header, 
@@ -26,6 +26,7 @@ interface Values {
   terms: boolean;
 }
 
+// Initialize event parameter types
 type T = HTMLInputElement;
 type Event = ChangeEvent<T> | FormEvent<T> | MouseEvent;
 type Data = InputOnChangeData | CheckboxProps;
