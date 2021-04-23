@@ -1,16 +1,16 @@
-import { AuthProvider } from "../auth/authContext";
+import { AuthProvider } from "../contexts/authContext";
 import Layout from "../components/Layout";
-import 'semantic-ui-css/semantic.min.css'
-import '../styles/globals.css';
+import "semantic-ui-css/semantic.min.css";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <Layout>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </Layout>
-  );
+	return (
+		<AuthProvider>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</AuthProvider>
+	);
 }
 
-export default MyApp
+export default MyApp;

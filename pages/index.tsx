@@ -1,29 +1,33 @@
 import { useEffect } from "react";
 import { client } from "../utils/shopify";
 import Components from "../components/Components";
-import styles from '../styles/Home.module.css';
+import styles from "../styles/Home.module.css";
 
 export default function Home({ products }) {
-  const { Shop } = Components;
+	const { Shop } = Components;
 
-  useEffect(() => {
-    document.querySelector('body').classList.add(styles.body);
-  });
+	useEffect(() => {
+		document.querySelector("body").classList.add(styles.body);
+	});
 
-  return (
-    <>
-      <Shop products={products} />
-    </>
-  );
+	return (
+		<>
+			<Shop products={products} />
+		</>
+	);
 }
 
-export async function getStaticProps() {
-  // Fetch all products from Shopify API
-  const products = await client.product.fetchAll();
+export async function getStaticProps(context: any) {
+	try {
+		// Fetch all products from Shopify API
+		const products = await client.product.fetchAll();
 
-  return {
-    props: {
-      products: JSON.parse(JSON.stringify(products))
-    }
-  };
+		return {
+			props: {
+				products: JSON.parse(JSON.stringify(products)),
+			},
+		};
+	} catch (err) {
+		console.error(err.message);
+	}
 }
