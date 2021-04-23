@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
-// import Image from "next/image";
 import { Header, Card, Image } from "semantic-ui-react";
 import { Product } from "../models/Product";
-import shopStyles from "../styles/shop.module.css";
+import shopStyles from "../styles/Shop.module.css";
 
 interface Props {
 	product: Product;
