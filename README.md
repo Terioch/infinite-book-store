@@ -13,7 +13,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 
 ## Launch
 
-This website will soon be hosted via Vercel.
+This website is hosted via Vercel at https://book-store-nine.vercel.app/
 
 ## Getting Started
 

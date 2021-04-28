@@ -19,7 +19,6 @@ const Nav: React.FC<MenuItemProps> = () => {
 	const { menu, title, rightMenu } = navStyles;
 	const { checkoutItems, signOutUser } = SharedFunctions;
 	const { user } = useAuth();
-	console.log(user);
 
 	// Conditionally render sign-in/sign-out button
 	const handleAuthState = () => {

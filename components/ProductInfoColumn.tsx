@@ -1,70 +1,61 @@
 import React from "react";
 import { Product } from "../models/Product";
-import { Card, Header, List, Input, Icon } from "semantic-ui-react";
+import MyPopup from "./Popup";
+import { Card, Header, List, Input } from "semantic-ui-react";
 
 interface ProductStyles {
-  [key: string]: string;
+	[key: string]: string;
 }
 
 interface Props {
-  product: Product;
-  productStyles: ProductStyles;
-  quantity: number;
-  handleQuantity: (e: any) => void;
-  addToCart: () => Promise<void>;
+	product: Product;
+	productStyles: ProductStyles;
+	quantity: number | string;
+	handleQuantity: (e: any) => void;
+	addToCart: () => Promise<void>;
+	popupContent: string;
 }
 
 const { Content } = Card;
 
-const ProductInfoColumn: React.FC<Props> = ({ 
-  product, 
-  productStyles,
-  quantity,
-  handleQuantity,
-  addToCart
+const ProductInfoColumn: React.FC<Props> = ({
+	product,
+	productStyles,
+	quantity,
+	handleQuantity,
+	addToCart,
+	popupContent,
 }) => {
-  const { title, description, variants } = product;
+	const { title, description, variants } = product;
 
-  return (
-    <>
-      <Card fluid color="teal">
-        <Content>
-          <Header as="h2">{title}</Header>
-        </Content>
-        <Content>
-          {description}
-        </Content>
-      </Card>
-      <Card 
-        className={productStyles.checkout} 
-        onClick={() => addToCart()}
-        raised
-      >
-        <Content>
-          <List link relaxed>
-            <List.Item>
-              <Header>
-                Add To Cart
-                <Icon 
-                  name="add to cart" 
-                  color="teal" 
-                  style={{ marginLeft: ".5rem" }}
-                />
-              </Header>
-              <Header>£{variants[0].price}</Header>
-            </List.Item>
-          </List>
-        </Content>
-      </Card>
-      <Input 
-        label="Quantity"
-        type="number" 
-        placeholder="Set to 1 if empty..."
-        value={quantity}
-        onChange={(e: any) => handleQuantity(e)}
-      />
-    </>
-  );
-}
+	return (
+		<>
+			<Card fluid color="teal">
+				<Content>
+					<Header as="h2">{title}</Header>
+				</Content>
+				<Content>{description}</Content>
+			</Card>
+			<Card
+				className={productStyles.checkout}
+				onClick={() => addToCart()}
+				raised
+			>
+				<Content>
+					<List link relaxed>
+						<MyPopup popupContent={popupContent} variants={variants} />
+					</List>
+				</Content>
+			</Card>
+			<Input
+				label="Quantity"
+				type="number"
+				placeholder="Set to 1 if invalid..."
+				value={quantity}
+				onChange={(e: any) => handleQuantity(e)}
+			/>
+		</>
+	);
+};
 
 export default ProductInfoColumn;
