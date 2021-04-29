@@ -8,6 +8,10 @@ interface VariantNode {
 	price: string;
 }
 
+interface ImageEdge {
+	node: ImageNode;
+}
+
 interface VariantEdge {
 	node: VariantNode;
 }
