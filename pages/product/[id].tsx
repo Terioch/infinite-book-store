@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { client } from "../../utils/shopify";
+import {
+	fetchAllProducts,
+	fetchSingleProduct,
+} from "../../shared-functions/fetchProductData";
 import { Product } from "../../models/Product";
 import { Segment, Grid } from "semantic-ui-react";
 import Components from "../../components/Components";
@@ -13,7 +17,9 @@ interface Props {
 
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
-	const { images, variants } = product;
+	const images = product.images.edges;
+	const variants = product.variants.edges;
+
 	const [image, setImage] = useState(images[0].src);
 	const [quantity, setQuantity] = useState<number | string>(1);
 	const [popupContent, setPopupContent] = useState("");
@@ -64,6 +70,7 @@ const product: React.FC<Props> = ({ product }) => {
 					<Column width={10}>
 						<ProductImageColumn
 							product={product}
+							images={images}
 							image={image}
 							setImage={setImage}
 						/>
@@ -87,8 +94,8 @@ const product: React.FC<Props> = ({ product }) => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-	// Fetch single product from Shopify API
-	const product = await client.product.fetch(id);
+	// Fetch a single product from Shopify API
+	const product = await fetchSingleProduct(id);
 
 	return {
 		props: {
@@ -99,8 +106,8 @@ export const getStaticProps = async ({ params: { id } }) => {
 
 export const getStaticPaths = async () => {
 	// Generate paths for each product by id
-	const products = await client.product.fetchAll();
-	const idList: Array<number> = products.map((p: any) => p.id);
+	const products = await fetchAllProducts();
+	const idList: Array<number> = products.map((p: any) => p.node.id);
 	const paths = idList.map(id => ({ params: { id: id.toString() } }));
 
 	return {

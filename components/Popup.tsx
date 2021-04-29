@@ -14,7 +14,7 @@ const MyPopup = ({ popupContent, variants }) => {
 							style={{ marginLeft: ".5rem" }}
 						/>
 					</Header>
-					<Header>£{variants[0].price}</Header>
+					<Header>£{variants.edges[0].price}</Header>
 				</List.Item>
 			}
 		>

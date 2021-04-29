@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { client } from "../utils/shopify";
+import { fetchAllProducts } from "../shared-functions/fetchProductData";
 import Components from "../components/Components";
 import styles from "../styles/Home.module.css";
 
@@ -10,17 +11,13 @@ export default function Home({ products }) {
 		document.querySelector("body").classList.add(styles.body);
 	});
 
-	return (
-		<>
-			<Shop products={products} />
-		</>
-	);
+	return <Shop products={products} />;
 }
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
 	try {
 		// Fetch all products from Shopify API
-		const products = await client.product.fetchAll();
+		const products = await fetchAllProducts();
 
 		return {
 			props: {

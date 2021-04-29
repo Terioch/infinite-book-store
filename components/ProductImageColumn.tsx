@@ -6,6 +6,7 @@ type dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 interface Props {
 	product: Product;
+	images: Product;
 	image: string;
 	setImage: dispatcher<string>;
 }
@@ -14,6 +15,7 @@ const { Row } = Grid;
 
 const ProductImageColumn: React.FC<Props> = ({
 	product,
+	images,
 	image,
 	setImage,
 }) => {
@@ -24,12 +26,12 @@ const ProductImageColumn: React.FC<Props> = ({
 			</Row>
 			<Row>
 				<List horizontal divided style={{ marginTop: "1rem" }}>
-					{product.images.map(image => (
-						<List.Item key={image.id}>
+					{images.map(image => (
+						<List.Item key={image.node.id}>
 							<Image
 								id="image"
 								size={"small"}
-								src={image.src}
+								src={image.node.src}
 								onClick={() => setImage(image.src)}
 							/>
 						</List.Item>
