@@ -5,7 +5,6 @@ import { Grid, List, Image } from "semantic-ui-react";
 type dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 interface Props {
-	product: Product;
 	images: Product;
 	image: string;
 	setImage: dispatcher<string>;
@@ -14,7 +13,6 @@ interface Props {
 const { Row } = Grid;
 
 const ProductImageColumn: React.FC<Props> = ({
-	product,
 	images,
 	image,
 	setImage,
@@ -32,7 +30,7 @@ const ProductImageColumn: React.FC<Props> = ({
 								id="image"
 								size={"small"}
 								src={image.node.src}
-								onClick={() => setImage(image.src)}
+								onClick={() => setImage(image.node.src)}
 							/>
 						</List.Item>
 					))}

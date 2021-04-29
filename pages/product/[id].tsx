@@ -20,7 +20,7 @@ const product: React.FC<Props> = ({ product }) => {
 	const images = product.images.edges;
 	const variants = product.variants.edges;
 
-	const [image, setImage] = useState(images[0].src);
+	const [image, setImage] = useState(images[0].node.src);
 	const [quantity, setQuantity] = useState<number | string>(1);
 	const [popupContent, setPopupContent] = useState("");
 
@@ -69,7 +69,6 @@ const product: React.FC<Props> = ({ product }) => {
 				<Row columns={2}>
 					<Column width={10}>
 						<ProductImageColumn
-							product={product}
 							images={images}
 							image={image}
 							setImage={setImage}
