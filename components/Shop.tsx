@@ -12,7 +12,7 @@ const Shop: React.FC<Props> = ({ products }) => {
 		<Segment basic secondary padded>
 			<Card.Group itemsPerRow={4} stackable>
 				{products.map((product, idx) => (
-					<Components.ShopItem key={idx} product={product.node} />
+					<Components.ShopItem key={idx} product={product} />
 				))}
 			</Card.Group>
 		</Segment>

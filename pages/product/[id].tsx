@@ -17,10 +17,9 @@ interface Props {
 
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
-	const images = product.images.edges;
-	const variants = product.variants.edges;
+	const { images, variants } = product;
 
-	const [image, setImage] = useState(images[0].node.src);
+	const [image, setImage] = useState(images.edges[0].node.src);
 	const [quantity, setQuantity] = useState<number | string>(1);
 	const [popupContent, setPopupContent] = useState("");
 
@@ -49,7 +48,7 @@ const product: React.FC<Props> = ({ product }) => {
 		// Add line items to checkout cart
 		const cart = await client.checkout.addLineItems(checkoutId, [
 			{
-				variantId: variants[0].id,
+				variantId: variants.edges[0].node.id,
 				quantity,
 			},
 		]);
@@ -69,7 +68,7 @@ const product: React.FC<Props> = ({ product }) => {
 				<Row columns={2}>
 					<Column width={10}>
 						<ProductImageColumn
-							images={images}
+							images={images.edges}
 							image={image}
 							setImage={setImage}
 						/>

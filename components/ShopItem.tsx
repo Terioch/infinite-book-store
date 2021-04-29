@@ -10,15 +10,20 @@ interface Props {
 
 const ShopItem: React.FC<Props> = ({ product }) => {
 	const { id, images, variants } = product;
+	console.log(images);
 
 	return (
 		<Link href={`product/${id}`}>
 			<Card color="blue">
 				<Card.Content style={{ padding: "0" }}>
-					<Image className={shopStyles.image} src={images[0].src} fluid />
+					<Image
+						className={shopStyles.image}
+						src={images?.edges[0].node.src}
+						fluid
+					/>
 				</Card.Content>
 				<Card.Content>
-					<Header as="h2">£{variants[0].price}</Header>
+					<Header as="h2">£{variants?.edges[0].node.price}</Header>
 				</Card.Content>
 			</Card>
 		</Link>
