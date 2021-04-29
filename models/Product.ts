@@ -1,17 +1,33 @@
 // Initialize interface for an individual product
-interface Img {
+interface ImageNode {
 	id: string;
 	src: string;
 }
 
-interface Variant {
+interface VariantNode {
 	price: string;
 }
 
-interface Product {
+interface VariantEdge {
+	node: VariantNode;
+}
+
+interface Images {
+	edges: Array<ImageEdge>;
+}
+
+interface Variants {
+	edges: Array<VariantEdge>;
+}
+
+interface ProductNode {
 	id: string;
 	title: string;
 	description: string;
-	images: Array<Img>;
-	variants: Variant;
+	images: Images;
+	variants: Variants;
+}
+
+export interface Product {
+	node: ProductNode;
 }

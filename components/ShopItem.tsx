@@ -17,12 +17,12 @@ const ShopItem: React.FC<Props> = ({ product }) => {
 				<Card.Content style={{ padding: "0" }}>
 					<Image
 						className={shopStyles.image}
-						src={images?.edges[0].node.src}
+						src={images.edges[0].node.src}
 						fluid
 					/>
 				</Card.Content>
 				<Card.Content>
-					<Header as="h2">£{variants?.edges[0].node.price}</Header>
+					<Header as="h2">£{variants.edges[0].node.price}</Header>
 				</Card.Content>
 			</Card>
 		</Link>
