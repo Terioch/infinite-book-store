@@ -1,36 +1,36 @@
 import { SetStateAction, Dispatch } from "react";
-import { Product } from "../models/Product";
-import { Grid, List, Image } from "semantic-ui-react";
+import { Image } from "../models/Product";
+import { Grid, List, Image as SuiImage } from "semantic-ui-react";
 
 type dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 interface Props {
-	images: Product;
-	image: string;
-	setImage: dispatcher<string>;
+	images: Array<Image>;
+	mainImage: string;
+	setMainImage: dispatcher<string>;
 }
 
 const { Row } = Grid;
 
 const ProductImageColumn: React.FC<Props> = ({
 	images,
-	image,
-	setImage,
+	mainImage,
+	setMainImage,
 }) => {
 	return (
 		<>
 			<Row>
-				<Image src={image} fluid />
+				<SuiImage src={mainImage} fluid />
 			</Row>
 			<Row>
 				<List horizontal divided style={{ marginTop: "1rem" }}>
-					{images.map(image => (
+					{images.map((image: Image) => (
 						<List.Item key={image.node.id}>
-							<Image
+							<SuiImage
 								id="image"
 								size={"small"}
 								src={image.node.src}
-								onClick={() => setImage(image.node.src)}
+								onClick={() => setMainImage(image.node.src)}
 							/>
 						</List.Item>
 					))}

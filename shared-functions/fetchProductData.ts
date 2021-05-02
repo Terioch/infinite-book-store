@@ -1,4 +1,5 @@
 const { gql } = require("graphql-request");
+// import { gql } from "graphql-request";
 
 // Initialize GraphQL query data
 const allProductsQuery = gql`

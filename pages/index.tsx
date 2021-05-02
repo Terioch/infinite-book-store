@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { client } from "../utils/shopify";
 import { fetchAllProducts } from "../shared-functions/fetchProductData";
 import Components from "../components/Components";
 import styles from "../styles/Home.module.css";

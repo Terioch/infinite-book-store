@@ -5,33 +5,30 @@ interface ImageNode {
 }
 
 interface VariantNode {
+	id: string;
 	price: string;
 }
 
-interface ImageEdge {
+export interface Image {
 	node: ImageNode;
 }
 
-interface VariantEdge {
+export interface Variant {
 	node: VariantNode;
 }
 
 interface Images {
-	edges: Array<ImageEdge>;
+	edges: Array<Image>;
 }
 
 interface Variants {
-	edges: Array<VariantEdge>;
+	edges: Array<Variant>;
 }
 
-interface ProductNode {
+export interface Product {
 	id: string;
 	title: string;
 	description: string;
 	images: Images;
 	variants: Variants;
-}
-
-export interface Product {
-	node: ProductNode;
 }
