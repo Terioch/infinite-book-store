@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Product } from "../models/Product";
 import { useScreenSize } from "../contexts/screenSizeContext";
-import { Card, Segment } from "semantic-ui-react";
+import { Segment, Grid, Card } from "semantic-ui-react";
 import Components from "./Components";
+
+const { Row, Column } = Grid;
 
 interface Props {
 	products: Array<Product>;
@@ -10,32 +12,28 @@ interface Props {
 
 const Shop: React.FC<Props> = ({ products }) => {
 	const { screenWidth } = useScreenSize();
-	const [itemsPerRow, setItemsPerRow] = useState(null);
-
-	// Handle number of books displayed per row on different screen widths
-	useEffect(() => {
-		if (screenWidth > 1268) {
-			setItemsPerRow(5);
-		} else if (screenWidth > 968) {
-			setItemsPerRow(4);
-		} else if (screenWidth > 668) {
-			setItemsPerRow(3);
-		} else if (screenWidth > 415) {
-			setItemsPerRow(2);
-		} else {
-			setItemsPerRow(1);
-		}
-	}, [screenWidth]);
 
 	return (
-		<Segment basic secondary padded>
-			<Card.Group itemsPerRow={itemsPerRow}>
-				{products.map((product, idx) => (
-					<Components.ShopItem key={idx} product={product} />
-				))}
-			</Card.Group>
+		<Segment padded secondary basic>
+			<Grid columns={2} stackable centered divided="vertically">
+				<Row>
+					{products.map((product, idx) => (
+						<Column key={idx}>
+							<Components.ShopItem product={product} />
+						</Column>
+					))}
+				</Row>
+			</Grid>
 		</Segment>
 	);
 };
 
 export default Shop;
+
+{
+	/* <Card.Group itemsPerRow="2" stackable>
+	{products.map((product, idx) => (
+		<Components.ShopItem key={idx} product={product} />
+	))}
+</Card.Group> */
+}

@@ -1,4 +1,5 @@
 .image {
 	max-height: 250px !important;
 	min-height: 100% !important;
+	cursor: pointer;
 }
