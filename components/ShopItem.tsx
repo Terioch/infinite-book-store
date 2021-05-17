@@ -9,7 +9,8 @@ interface Props {
 }
 
 const ShopItem: React.FC<Props> = ({ product }) => {
-	const { id, images, variants } = product.node;
+	const { id, title, images, variants } = product.node;
+	//console.log(product.node);
 
 	return (
 		<Link href={`product/${id}`}>
@@ -23,6 +24,7 @@ const ShopItem: React.FC<Props> = ({ product }) => {
 				</Card.Content>
 				<Card.Content>
 					<Header as="h2">£{variants.edges[0].node.price}</Header>
+					<Header as="h3">{title}</Header>
 				</Card.Content>
 			</Card>
 		</Link>

@@ -11,7 +11,6 @@ import {
 } from "semantic-ui-react";
 import navStyles from "../styles/Nav.module.css";
 
-// Destructure semantic ui components
 const { Item } = Menu;
 const { Content } = Button;
 
@@ -43,21 +42,21 @@ const Nav: React.FC<MenuItemProps> = () => {
 		<Segment basic inverted padded>
 			<Menu className={menu} fluid borderless color="black" inverted>
 				<Item>
-					<Header className={title} as="h1" color="blue">
-						Infinite Book Store
-						<Icon name="bolt" color="grey" />
-					</Header>
+					<Link href="/">
+						<Header className={title} as="h1" color="blue">
+							Infinite Book Store
+							<Icon name="bolt" color="grey" />
+						</Header>
+					</Link>
 				</Item>
 				<Item className={rightMenu}>
 					<Item>
-						<Link href="/">
-							<Button animated="vertical" inverted color="grey">
-								<Content hidden>Shop</Content>
-								<Content visible>
-									<Icon name="shop" />
-								</Content>
-							</Button>
-						</Link>
+						<Button animated="vertical" inverted color="grey">
+							<Content hidden>Cart</Content>
+							<Content visible>
+								<Icon name="shop" />
+							</Content>
+						</Button>
 					</Item>
 					<Item fitted="horizontally">{handleAuthState()}</Item>
 					<Item>

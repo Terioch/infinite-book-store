@@ -1,24 +1,25 @@
 .menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .rightMenu {
-  position: absolute!important;
-  right: 1rem;
+	position: absolute !important;
+	right: 1rem;
 }
 
 .title {
-  color: white!important;
+	color: white !important;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
-  .menu {
-    flex-direction: column;
-  }
+	.menu {
+		flex-direction: column;
+	}
 
-  .rightMenu {
-    position: static!important;
-  }
+	.rightMenu {
+		position: static !important;
+	}
 }

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { client } from "../../utils/shopify";
 import Client from "../../shared-functions/fetchProductData";
 import { Product } from "../../models/Product";
-import { Segment, Grid } from "semantic-ui-react";
 import Components from "../../components/Components";
+import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
 
 const { fetchAllProducts, fetchSingleProduct } = Client;
@@ -16,7 +16,6 @@ interface Props {
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
 	const { images, variants } = product.node;
-	console.log(product);
 
 	const [mainImage, setMainImage] = useState(images?.edges[0].node.src);
 	const [quantity, setQuantity] = useState<number | string>(1);
@@ -90,7 +89,6 @@ const product: React.FC<Props> = ({ product }) => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-	// Fetch a single product from Shopify API
 	const product = await fetchSingleProduct(id);
 
 	return {
