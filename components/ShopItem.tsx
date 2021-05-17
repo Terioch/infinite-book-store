@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Header, Card, Image } from "semantic-ui-react";
 import { Product } from "../models/Product";
+import { Header, Card, Image } from "semantic-ui-react";
 import shopStyles from "../styles/Shop.module.css";
 
 interface Props {

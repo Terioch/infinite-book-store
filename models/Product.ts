@@ -25,10 +25,14 @@ interface Variants {
 	edges: Array<Variant>;
 }
 
-export interface Product {
+interface ProductNode {
 	id: string;
 	title: string;
 	description: string;
 	images: Images;
 	variants: Variants;
+}
+
+export interface Product {
+	node: ProductNode;
 }

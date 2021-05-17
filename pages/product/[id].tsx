@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { client } from "../../utils/shopify";
-import {
-	fetchAllProducts,
-	fetchSingleProduct,
-} from "../../shared-functions/fetchProductData";
+import Client from "../../shared-functions/fetchProductData";
 import { Product } from "../../models/Product";
 import { Segment, Grid } from "semantic-ui-react";
 import Components from "../../components/Components";
 import productStyles from "../../styles/product.module.css";
 
+const { fetchAllProducts, fetchSingleProduct } = Client;
 const { Row, Column } = Grid;
 
 interface Props {
@@ -17,9 +15,10 @@ interface Props {
 
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
-	const { images, variants } = product;
+	const { images, variants } = product.node;
+	console.log(product);
 
-	const [mainImage, setMainImage] = useState(images.edges[0].node.src);
+	const [mainImage, setMainImage] = useState(images?.edges[0].node.src);
 	const [quantity, setQuantity] = useState<number | string>(1);
 	const [popupContent, setPopupContent] = useState("");
 
@@ -56,7 +55,6 @@ const product: React.FC<Props> = ({ product }) => {
 		sessionStorage.setItem("cart", JSON.stringify(cart));
 	};
 
-	// Update quantity on input change
 	const handleQuantity = (e: any) => {
 		const value = parseInt(e.target.value);
 		setQuantity(value ? value : "");

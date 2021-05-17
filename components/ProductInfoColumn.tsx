@@ -26,7 +26,7 @@ const ProductInfoColumn: React.FC<Props> = ({
 	addToCart,
 	popupContent,
 }) => {
-	const { title, description, variants } = product;
+	const { title, description, variants } = product.node;
 
 	return (
 		<>

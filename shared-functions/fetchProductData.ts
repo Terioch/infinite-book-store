@@ -1,112 +1,111 @@
-const { gql } = require("graphql-request");
-// import { gql } from "graphql-request";
+import { URL } from "../utils/shopifyApiEndpoint";
+import gql from "../graphql/queries";
 
-// Initialize GraphQL query data
-const allProductsQuery = gql`
-	query Products {
-		products(first: 10) {
-			edges {
-				node {
-					id
-					title
-					description
-					images(first: 4) {
-						edges {
-							node {
-								id
-								src
-							}
-						}
-					}
-					variants(first: 1) {
-						edges {
-							node {
-								id
-								price
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
+const { allProductsQuery, productQuery } = gql;
 
-const productQuery = gql`
-	query Product($id: ID!) {
-		node(id: $id) {
-			id
-			... on Product {
-				id
-				title
-				description
-				images(first: 4) {
-					edges {
-						node {
-							id
-							src
-						}
-					}
-				}
-				variants(first: 1) {
-					edges {
-						node {
-							id
-							price
-						}
-					}
-				}
-			}
-		}
-	}
-`;
+function Client() {
+	// Fetch all products
+	this.fetchAllProducts = async () => {
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-Shopify-Storefront-Access-Token":
+					process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+			},
+			body: JSON.stringify({ query: allProductsQuery }),
+		};
 
-// Initialize shopify url API endpoint
-const URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/api/graphql`;
+		const res = await fetch(URL, options);
+		const {
+			data: {
+				products: { edges },
+			},
+		} = await res.json();
+		return edges;
+	};
+
+	this.fetchSingleProduct = async (id: string) => {
+		const params = {
+			query: productQuery,
+			variables: { id },
+		};
+
+		const options = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				"X-Shopify-Storefront-Access-Token":
+					process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+			},
+			body: JSON.stringify(params),
+		};
+
+		const response = await fetch(URL, options);
+		const { data } = await response.json();
+		return data;
+	};
+
+	this.createCheckout = async () => {
+		// TODO
+	};
+
+	this.addLineItems = async () => {
+		// TODO
+	};
+}
+
+export default new Client();
 
 // Fetch all products
-export async function fetchAllProducts() {
-	const options = {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			"X-Shopify-Storefront-Access-Token":
-				process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-		},
-		body: JSON.stringify({ query: allProductsQuery }),
-	};
+// export async function fetchAllProducts() {
+// 	const options = {
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 			"X-Shopify-Storefront-Access-Token":
+// 				process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+// 		},
+// 		body: JSON.stringify({ query: allProductsQuery }),
+// 	};
 
-	const res = await fetch(URL, options);
-	// Destructure product edges from the response json
-	const {
-		data: {
-			products: { edges },
-		},
-	} = await res.json();
-	return edges;
-}
+// 	const res = await fetch(URL, options);
+// 	const {
+// 		data: {
+// 			products: { edges },
+// 		},
+// 	} = await res.json();
+// 	return edges;
+// }
 
-// Fetch a single product
-export async function fetchSingleProduct(id: string) {
-	const params = {
-		query: productQuery,
-		variables: { id },
-	};
+// // Fetch a single product
+// export async function fetchSingleProduct(id: string) {
+// 	const params = {
+// 		query: productQuery,
+// 		variables: { id },
+// 	};
 
-	const options = {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-			"X-Shopify-Storefront-Access-Token":
-				process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
-		},
-		body: JSON.stringify(params),
-	};
+// 	const options = {
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 			Accept: "application/json",
+// 			"X-Shopify-Storefront-Access-Token":
+// 				process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+// 		},
+// 		body: JSON.stringify(params),
+// 	};
 
-	const response = await fetch(URL, options);
-	const {
-		data: { node },
-	} = await response.json();
-	return node;
-}
+// 	const response = await fetch(URL, options);
+// 	const { data } = await response.json();
+// 	return data;
+// }
+
+// export async function createCheckout() {
+// 	// Create a checkout
+// }
+
+// export async function addLineItems() {
+// 	// Add Line Items
+// }

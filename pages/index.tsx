@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchAllProducts } from "../shared-functions/fetchProductData";
+import client from "../shared-functions/fetchProductData";
 import Components from "../components/Components";
 import styles from "../styles/Home.module.css";
 
@@ -16,7 +16,7 @@ export default function Home({ products }) {
 export async function getStaticProps() {
 	try {
 		// Fetch all products from Shopify API
-		const products = await fetchAllProducts();
+		const products = await client.fetchAllProducts();
 
 		return {
 			props: {
