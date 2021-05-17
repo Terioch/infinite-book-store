@@ -1,5 +1,7 @@
-.image {
-	max-height: 250px !important;
-	min-height: 100% !important;
+.cursorPointer {
 	cursor: pointer;
+}
+
+.bookTitle:hover {
+	color: #866846;
 }
