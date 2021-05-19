@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "../contexts/authContext";
 import Components from "./Components";
@@ -14,7 +13,6 @@ import {
 import navStyles from "../styles/Nav.module.css";
 
 const { Item } = Menu;
-const { Content } = Button;
 
 const Nav: React.FC<MenuItemProps> = () => {
 	const { menu, title, rightMenu } = navStyles;
