@@ -1,15 +1,11 @@
 import { useEffect } from "react";
+import { client as Client } from "../utils/shopify";
 import client from "../shared-functions/fetchProductData";
 import Components from "../components/Components";
 import styles from "../styles/Home.module.css";
 
 export default function Home({ products }) {
 	const { Shop } = Components;
-
-	useEffect(() => {
-		document.querySelector("body").classList.add(styles.body);
-	});
-
 	return <Shop products={products} />;
 }
 

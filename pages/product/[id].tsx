@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { client } from "../../utils/shopify";
-import Client from "../../shared-functions/fetchProductData";
+import { client as Client } from "../../utils/shopify";
+import client from "../../shared-functions/fetchProductData";
 import { Product } from "../../models/Product";
 import Components from "../../components/Components";
 import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
 
-const { fetchAllProducts, fetchSingleProduct } = Client;
+const { fetchAllProducts, fetchSingleProduct } = client;
 const { Row, Column } = Grid;
 
 interface Props {

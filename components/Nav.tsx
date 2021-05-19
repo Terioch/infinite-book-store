@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "../contexts/authContext";
+import Components from "./Components";
 import SharedFunctions from "../shared-functions/SharedFunctions";
 import {
 	Segment,
@@ -16,6 +18,7 @@ const { Content } = Button;
 
 const Nav: React.FC<MenuItemProps> = () => {
 	const { menu, title, rightMenu } = navStyles;
+	const { Cart } = Components;
 	const { checkoutItems, signOutUser } = SharedFunctions;
 	const { user } = useAuth();
 
@@ -51,12 +54,7 @@ const Nav: React.FC<MenuItemProps> = () => {
 				</Link>
 				<Item className={rightMenu}>
 					<Item>
-						<Button animated="vertical" inverted color="grey">
-							<Content hidden>Cart</Content>
-							<Content visible>
-								<Icon name="shop" />
-							</Content>
-						</Button>
+						<Cart />
 					</Item>
 					<Item fitted="horizontally">{handleAuthState()}</Item>
 					<Item>

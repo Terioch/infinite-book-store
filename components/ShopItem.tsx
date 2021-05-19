@@ -30,15 +30,13 @@ const ShopItem: React.FC<Props> = ({ product }) => {
 						</Column>
 					</Link>
 					<Column verticalAlign="middle">
-						<Link href={`/product/${id}`}>
-							<Header
-								className={`${bookTitle} ${cursorPointer}`}
-								as="h3"
-								color="black"
-							>
-								{title}
-							</Header>
-						</Link>
+						<Header
+							className={`${bookTitle} ${cursorPointer}`}
+							as="h3"
+							color="black"
+						>
+							<Link href={`/product/${id}`}>{title}</Link>
+						</Header>
 						<Header as="h3" color="blue">
 							£{variants.edges[0].node.price}
 						</Header>

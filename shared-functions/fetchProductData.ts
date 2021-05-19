@@ -9,11 +9,11 @@ function Client() {
 		const options = {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/graphql",
 				"X-Shopify-Storefront-Access-Token":
 					process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
 			},
-			body: JSON.stringify({ query: allProductsQuery }),
+			body: allProductsQuery,
 		};
 
 		const res = await fetch(URL, options);
