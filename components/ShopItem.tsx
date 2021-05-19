@@ -14,7 +14,6 @@ interface Props {
 const ShopItem: React.FC<Props> = ({ product }) => {
 	const { bookTitle, cursorPointer } = shopStyles;
 	const { id, title, images, variants } = product.node;
-	//console.log(product.node);
 
 	return (
 		<Segment basic color="grey" style={{ backgroundColor: "#fff" }}>

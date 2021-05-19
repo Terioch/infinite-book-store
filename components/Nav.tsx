@@ -41,14 +41,14 @@ const Nav: React.FC<MenuItemProps> = () => {
 	return (
 		<Segment basic inverted padded>
 			<Menu className={menu} fluid borderless color="black" inverted>
-				<Item>
-					<Link href="/">
+				<Link href="/">
+					<Item>
 						<Header className={title} as="h1" color="blue">
 							Infinite Book Store
 							<Icon name="bolt" color="grey" />
 						</Header>
-					</Link>
-				</Item>
+					</Item>
+				</Link>
 				<Item className={rightMenu}>
 					<Item>
 						<Button animated="vertical" inverted color="grey">

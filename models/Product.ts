@@ -7,6 +7,7 @@ interface ImageNode {
 interface VariantNode {
 	id: string;
 	price: string;
+	inventoryQuantity: number;
 }
 
 export interface Image {

@@ -63,24 +63,23 @@ const product: React.FC<Props> = ({ product }) => {
 		<Segment padded secondary>
 			<Grid container centered stackable>
 				<Row columns={2}>
-					<Column width={10}>
+					<Column width={6} textAlign="center">
 						<ProductImageColumn
 							images={images.edges}
 							mainImage={mainImage}
 							setMainImage={setMainImage}
+							productStyles={productStyles}
 						/>
 					</Column>
-					<Column width={6}>
-						<Row>
-							<ProductInfoColumn
-								product={product}
-								productStyles={productStyles}
-								quantity={quantity}
-								handleQuantity={handleQuantity}
-								addToCart={addToCart}
-								popupContent={popupContent}
-							/>
-						</Row>
+					<Column width={10}>
+						<ProductInfoColumn
+							product={product}
+							productStyles={productStyles}
+							quantity={quantity}
+							handleQuantity={handleQuantity}
+							addToCart={addToCart}
+							popupContent={popupContent}
+						/>
 					</Column>
 				</Row>
 			</Grid>
