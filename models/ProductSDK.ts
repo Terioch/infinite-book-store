@@ -1,3 +1,4 @@
+// Product model for use with the Buy SDK library
 export interface Image {
 	id: string;
 	src: string;

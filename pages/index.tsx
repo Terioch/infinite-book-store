@@ -10,7 +10,7 @@ export default function Home({ products }) {
 
 export async function getStaticProps() {
 	try {
-		const products = await client.product.fetchAll();
+		const products = await Client.product.fetchAll();
 
 		return {
 			props: {

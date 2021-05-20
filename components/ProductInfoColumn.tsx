@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "../models/Product";
+import { Product } from "../models/ProductSDK";
 import MyPopup from "./Popup";
 import {
 	Card,
@@ -10,6 +10,8 @@ import {
 	Segment,
 } from "semantic-ui-react";
 
+const { Content } = Card;
+
 interface ProductStyles {
 	[key: string]: string;
 }
@@ -19,11 +21,9 @@ interface Props {
 	productStyles: ProductStyles;
 	quantity: number | string;
 	handleQuantity: (e: any) => void;
-	addToCart: () => Promise<void>;
+	addToCart: () => void;
 	popupContent: string;
 }
-
-const { Content } = Card;
 
 const ProductInfoColumn: React.FC<Props> = ({
 	product,
@@ -33,17 +33,17 @@ const ProductInfoColumn: React.FC<Props> = ({
 	addToCart,
 	popupContent,
 }) => {
-	const { title, description, variants } = product.node;
-	console.log(variants.edges[0].node.inventoryQuantity);
+	const { title, description, variants } = product;
+	console.log(product);
 
 	return (
 		<Segment basic vertical>
 			<Segment color="teal">
 				<Header as="h2">{title}</Header>
-				<Divider />
-				<Header as="h3" color="blue">
-					14 in stock
+				<Header as="h2" color="blue" style={{ marginTop: "0" }}>
+					£{variants[0].price}
 				</Header>
+				<Divider />
 				<Input
 					fluid
 					label="Quantity"
@@ -52,17 +52,7 @@ const ProductInfoColumn: React.FC<Props> = ({
 					value={quantity}
 					onChange={(e: any) => handleQuantity(e)}
 				/>
-				<Card
-					className={productStyles.checkout}
-					onClick={() => addToCart()}
-					raised
-				>
-					<Content>
-						<List link relaxed>
-							<MyPopup popupContent={popupContent} variants={variants} />
-						</List>
-					</Content>
-				</Card>
+				<MyPopup popupContent={popupContent} addToCart={addToCart} />
 			</Segment>
 			<Segment basic style={{ backgroundColor: "#fff" }}>
 				{description}

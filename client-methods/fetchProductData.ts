@@ -1,4 +1,4 @@
-import { URL } from "../utils/shopifyApiEndpoint";
+import { STOREFRONT_URL } from "../utils/shopifyApiEndpoint";
 import gql from "../graphql/queries";
 
 const { allProductsQuery, productQuery } = gql;
@@ -16,7 +16,7 @@ function Product() {
 			body: allProductsQuery,
 		};
 
-		const res = await fetch(URL, options);
+		const res = await fetch(STOREFRONT_URL, options);
 		const {
 			data: {
 				products: { edges },
@@ -43,7 +43,7 @@ function Product() {
 			body: JSON.stringify(params),
 		};
 
-		const response = await fetch(URL, options);
+		const response = await fetch(STOREFRONT_URL, options);
 		const { data } = await response.json();
 		return data;
 	};

@@ -1,6 +1,6 @@
 import { SetStateAction, Dispatch } from "react";
 import Image from "next/image";
-import { Image as ImageModel } from "../models/Product";
+import { Image as ImageModel } from "../models/ProductSDK";
 import { Grid, List, Image as SuiImage, Segment } from "semantic-ui-react";
 
 type dispatcher<S> = Dispatch<SetStateAction<S>>;
@@ -34,12 +34,12 @@ const ProductImageColumn: React.FC<Props> = ({
 			<Row centered>
 				<List horizontal divided style={{ marginTop: "1rem" }}>
 					{images.map((image: ImageModel) => (
-						<List.Item key={image.node.id}>
+						<List.Item key={image.id}>
 							<SuiImage
 								className={productStyles.smallImage}
-								src={image.node.src}
+								src={image.src}
 								size="tiny"
-								onClick={() => setMainImage(image.node.src)}
+								onClick={() => setMainImage(image.src)}
 							/>
 						</List.Item>
 					))}

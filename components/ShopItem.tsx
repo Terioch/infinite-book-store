@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "../models/Product";
+import { Product } from "../models/ProductSDK";
 import { Header, Segment, Grid } from "semantic-ui-react";
 import shopStyles from "../styles/Shop.module.css";
 
@@ -13,7 +13,7 @@ interface Props {
 
 const ShopItem: React.FC<Props> = ({ product }) => {
 	const { bookTitle, cursorPointer } = shopStyles;
-	const { id, title, images, variants } = product.node;
+	const { id, title, images, variants } = product;
 
 	return (
 		<Segment basic color="grey" style={{ backgroundColor: "#fff" }}>
@@ -23,7 +23,7 @@ const ShopItem: React.FC<Props> = ({ product }) => {
 						<Column className={cursorPointer}>
 							<Image
 								className={cursorPointer}
-								src={images.edges[0].node.src}
+								src={images[0].src}
 								height={200}
 								width={180}
 							/>
@@ -36,7 +36,7 @@ const ShopItem: React.FC<Props> = ({ product }) => {
 							</Header>
 						</Link>
 						<Header as="h3" color="blue">
-							£{variants.edges[0].node.price}
+							£{variants[0].price}
 						</Header>
 					</Column>
 				</Row>

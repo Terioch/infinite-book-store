@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { client as Client } from "../../utils/shopify";
 import client from "../../client-methods/ClientMethods";
-import { Product } from "../../models/Product";
+import { Product } from "../../models/ProductSDK";
 import Components from "../../components/Components";
 import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
@@ -15,9 +15,9 @@ interface Props {
 
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
-	const { images, variants } = product.node;
+	const { images, variants } = product;
 
-	const [mainImage, setMainImage] = useState(images?.edges[0].node.src);
+	const [mainImage, setMainImage] = useState(images[0].src);
 	const [quantity, setQuantity] = useState<number | string>(1);
 	const [popupContent, setPopupContent] = useState("");
 
@@ -44,7 +44,7 @@ const product: React.FC<Props> = ({ product }) => {
 		// Add line items to checkout cart
 		const cart = await Client.checkout.addLineItems(checkoutId, [
 			{
-				variantId: variants.edges[0].node.id,
+				variantId: variants[0].id,
 				quantity,
 			},
 		]);
@@ -63,7 +63,7 @@ const product: React.FC<Props> = ({ product }) => {
 				<Row columns={2}>
 					<Column width={6} textAlign="center">
 						<ProductImageColumn
-							images={images.edges}
+							images={images}
 							mainImage={mainImage}
 							setMainImage={setMainImage}
 							productStyles={productStyles}
@@ -86,7 +86,7 @@ const product: React.FC<Props> = ({ product }) => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-	const product = await fetchOne(id);
+	const product = await Client.product.fetch(id);
 
 	return {
 		props: {
@@ -97,8 +97,8 @@ export const getStaticProps = async ({ params: { id } }) => {
 
 export const getStaticPaths = async () => {
 	// Generate paths for each product by id
-	const products = await fetchAll();
-	const idList: Array<number> = products.map((p: any) => p.node.id);
+	const products = await Client.product.fetchAll();
+	const idList: Array<number> = products.map((p: Product) => p.id);
 	const paths = idList.map(id => ({ params: { id: id.toString() } }));
 
 	return {

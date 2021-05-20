@@ -1,4 +1,4 @@
-import { Product } from "../models/Product";
+import { Product } from "../models/ProductSDK";
 import { Segment, Grid } from "semantic-ui-react";
 import Components from "./Components";
 
