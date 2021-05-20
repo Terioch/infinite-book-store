@@ -1,4 +1,5 @@
 import { useState } from "react";
+import client from "../client-methods/ClientMethods";
 import {
 	Modal,
 	Menu,
@@ -59,7 +60,12 @@ const Cart: React.FC<Props> = () => {
 			</Segment>
 			<Divider />
 			<Segment basic textAlign="center">
-				<Button circular size="big" color="black">
+				<Button
+					circular
+					size="big"
+					color="black"
+					onClick={client.checkoutItems}
+				>
 					Checkout
 				</Button>
 			</Segment>

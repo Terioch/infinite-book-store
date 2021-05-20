@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { client as Client } from "../../utils/shopify";
-import client from "../../shared-functions/fetchProductData";
+import client from "../../client-methods/ClientMethods";
 import { Product } from "../../models/Product";
 import Components from "../../components/Components";
 import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
 
-const { fetchAllProducts, fetchSingleProduct } = client;
+const { fetchAll, fetchOne } = client.product;
 const { Row, Column } = Grid;
 
 interface Props {
@@ -29,29 +29,27 @@ const product: React.FC<Props> = ({ product }) => {
 			return;
 		}
 
-		// Trigger a popup to indicate success
 		setPopupContent("Item successfully added to cart");
 
-		let checkoutId = sessionStorage.getItem("checkoutId");
+		let checkoutId = localStorage.getItem("checkoutId");
 
 		// Create new checkout if checkoutId was not fetched from session storage
 		if (!checkoutId) {
-			const checkout = await client.checkout.create();
+			const checkout = await Client.checkout.create();
 			checkoutId = checkout.id;
 		}
 
-		// Set item within session storage and ensure quantity is valid
-		sessionStorage.setItem("checkoutId", checkoutId);
+		localStorage.setItem("checkoutId", checkoutId);
 
 		// Add line items to checkout cart
-		const cart = await client.checkout.addLineItems(checkoutId, [
+		const cart = await Client.checkout.addLineItems(checkoutId, [
 			{
 				variantId: variants.edges[0].node.id,
 				quantity,
 			},
 		]);
 
-		sessionStorage.setItem("cart", JSON.stringify(cart));
+		localStorage.setItem("cart", JSON.stringify(cart));
 	};
 
 	const handleQuantity = (e: any) => {
@@ -88,7 +86,7 @@ const product: React.FC<Props> = ({ product }) => {
 };
 
 export const getStaticProps = async ({ params: { id } }) => {
-	const product = await fetchSingleProduct(id);
+	const product = await fetchOne(id);
 
 	return {
 		props: {
@@ -99,7 +97,7 @@ export const getStaticProps = async ({ params: { id } }) => {
 
 export const getStaticPaths = async () => {
 	// Generate paths for each product by id
-	const products = await fetchAllProducts();
+	const products = await fetchAll();
 	const idList: Array<number> = products.map((p: any) => p.node.id);
 	const paths = idList.map(id => ({ params: { id: id.toString() } }));
 

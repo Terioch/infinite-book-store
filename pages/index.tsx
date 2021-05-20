@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { client as Client } from "../utils/shopify";
-import client from "../shared-functions/fetchProductData";
+import client from "../client-methods/ClientMethods";
 import Components from "../components/Components";
 import styles from "../styles/Home.module.css";
 
@@ -11,7 +10,7 @@ export default function Home({ products }) {
 
 export async function getStaticProps() {
 	try {
-		const products = await client.fetchAllProducts();
+		const products = await client.product.fetchAll();
 
 		return {
 			props: {

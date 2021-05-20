@@ -1,9 +1,11 @@
 import checkoutItems from "./checkoutItems";
 import signOutUser from "./signOutUser";
+import product from "./fetchProductData";
 
-const SharedFunctions = {
+const Client = {
 	checkoutItems,
 	signOutUser,
+	product,
 };
 
-export default SharedFunctions;
+export default Client;

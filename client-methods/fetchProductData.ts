@@ -3,9 +3,9 @@ import gql from "../graphql/queries";
 
 const { allProductsQuery, productQuery } = gql;
 
-function Client() {
+function Product() {
 	// Fetch all products
-	this.fetchAllProducts = async () => {
+	this.fetchAll = async () => {
 		const options = {
 			method: "POST",
 			headers: {
@@ -26,7 +26,7 @@ function Client() {
 	};
 
 	// Fetch a single product
-	this.fetchSingleProduct = async (id: string) => {
+	this.fetchOne = async (id: string) => {
 		const params = {
 			query: productQuery,
 			variables: { id },
@@ -57,4 +57,4 @@ function Client() {
 	};
 }
 
-export default new Client();
+export default new Product();

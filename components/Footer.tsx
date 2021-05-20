@@ -2,19 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { useAuth } from "../contexts/authContext";
 import { Segment, Menu } from "semantic-ui-react";
-import SharedFunctions from "../shared-functions/SharedFunctions";
+import client from "../client-methods/ClientMethods";
 import footerStyles from "../styles/Footer.module.css";
 
 const Footer: React.FC = () => {
 	const { container, menu } = footerStyles;
-	const { checkoutItems, signOutUser } = SharedFunctions;
 	const { user } = useAuth();
 
 	// Conditionally render sign-in/sign-out item
 	const handleAuthState = () => {
 		if (user) {
 			return (
-				<Menu.Item as="a" onClick={signOutUser}>
+				<Menu.Item as="a" onClick={client.signOutUser}>
 					Sign Out
 				</Menu.Item>
 			);
@@ -34,7 +33,7 @@ const Footer: React.FC = () => {
 					<Menu.Item as="a">Shop</Menu.Item>
 				</Link>
 				{handleAuthState()}
-				<Menu.Item as="a" onClick={() => checkoutItems()}>
+				<Menu.Item as="a" onClick={() => client.checkoutItems()}>
 					Checkout
 				</Menu.Item>
 			</Menu>

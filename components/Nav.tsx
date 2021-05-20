@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useAuth } from "../contexts/authContext";
 import Components from "./Components";
-import SharedFunctions from "../shared-functions/SharedFunctions";
+import client from "../client-methods/ClientMethods";
 import {
 	Segment,
 	Menu,
@@ -17,14 +17,13 @@ const { Item } = Menu;
 const Nav: React.FC<MenuItemProps> = () => {
 	const { menu, title, rightMenu } = navStyles;
 	const { Cart } = Components;
-	const { checkoutItems, signOutUser } = SharedFunctions;
 	const { user } = useAuth();
 
 	// Conditionally render sign-in/sign-out button
 	const handleAuthState = () => {
 		if (user) {
 			return (
-				<Button inverted color="grey" onClick={signOutUser}>
+				<Button inverted color="grey" onClick={client.signOutUser}>
 					Sign Out
 				</Button>
 			);
@@ -61,7 +60,7 @@ const Nav: React.FC<MenuItemProps> = () => {
 							labelPosition="right"
 							icon
 							color="green"
-							onClick={() => checkoutItems()}
+							onClick={() => client.checkoutItems()}
 						>
 							<Icon name="arrow right" />
 							Checkout
