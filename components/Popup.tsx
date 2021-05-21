@@ -1,4 +1,5 @@
 import { Popup, List, Button, Card } from "semantic-ui-react";
+import popupStyles from "../styles/Popup.module.css";
 
 const { Item, Content, Header, Icon } = List;
 
@@ -9,7 +10,7 @@ interface Props {
 
 const MyPopup: React.FC<Props> = ({ popupContent, addToCart }) => {
 	const trigger = (
-		<Card link onClick={addToCart}>
+		<Card className={popupStyles.addToCart} onClick={addToCart}>
 			<Card.Content>
 				<List horizontal>
 					<Item>

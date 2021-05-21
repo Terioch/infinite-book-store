@@ -72,7 +72,6 @@ const product: React.FC<Props> = ({ product }) => {
 					<Column width={10}>
 						<ProductInfoColumn
 							product={product}
-							productStyles={productStyles}
 							quantity={quantity}
 							handleQuantity={handleQuantity}
 							addToCart={addToCart}

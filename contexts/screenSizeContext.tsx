@@ -4,20 +4,26 @@ export type ScreenSizeModel = {
 	screenWidth: number;
 };
 
-const ScreenSizeContext = createContext({ screenWidth: null });
+const ScreenSizeContext = createContext({
+	screenWidth: null,
+	screenHeight: null,
+});
 
 export const ScreenSizeProvider = ({ children }) => {
 	const [screenWidth, setScreenWidth] = useState(null);
+	const [screenHeight, setScreenHeight] = useState(null);
 
 	useEffect(() => {
-    setScreenWidth(window.innerWidth);
+		setScreenWidth(window.innerWidth);
+		setScreenHeight(window.innerHeight);
 		window.addEventListener("resize", () => {
 			setScreenWidth(window.innerWidth);
+			setScreenHeight(window.innerHeight);
 		});
 	}, []);
 
 	return (
-		<ScreenSizeContext.Provider value={{ screenWidth }}>
+		<ScreenSizeContext.Provider value={{ screenWidth, screenHeight }}>
 			{children}
 		</ScreenSizeContext.Provider>
 	);

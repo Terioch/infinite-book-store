@@ -1,10 +1,3 @@
-div.ui.card > .content,
-.ui.cards > .card > .content,
-.checkout:hover {
-	background-color: #eaecee !important;
-	cursor: pointer;
-}
-
 .smallImage {
 	cursor: pointer;
 }

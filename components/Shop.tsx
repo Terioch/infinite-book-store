@@ -11,7 +11,7 @@ interface Props {
 const Shop: React.FC<Props> = ({ products }) => {
 	return (
 		<Segment padded secondary basic>
-			<Grid columns={2} stackable centered divided="vertically">
+			<Grid columns={2} stackable divided="vertically">
 				<Row>
 					{products.map((product, idx) => (
 						<Column key={idx}>
