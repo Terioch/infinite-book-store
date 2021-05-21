@@ -13,7 +13,6 @@ const Footer: React.FC = () => {
 
 	// Position footer at bottom of page if both screen height and width are sufficiently great
 	const handleFooterPosition = () => {
-		console.log(screenHeight, screenWidth);
 		if (screenHeight >= 1024 && screenWidth >= 768) {
 			return stick;
 		}
