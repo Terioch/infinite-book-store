@@ -28,7 +28,7 @@ const Nav: React.FC<MenuItemProps> = () => {
 						</Header>
 					</Item>
 				</Link>
-				{screenWidth <= 768 ? (
+				{screenWidth < 968 ? (
 					<MobileMenu navStyles={navStyles} />
 				) : (
 					<DesktopMenu navStyles={navStyles} />
