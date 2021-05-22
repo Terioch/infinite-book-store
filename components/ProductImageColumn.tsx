@@ -1,19 +1,16 @@
 import { SetStateAction, Dispatch } from "react";
 import Image from "next/image";
 import { Image as ImageModel } from "../models/ProductSDK";
+import { Styles } from "../models/Styles";
 import { Grid, List, Image as SuiImage, Segment } from "semantic-ui-react";
 
 type dispatcher<S> = Dispatch<SetStateAction<S>>;
-
-interface ProductStyles {
-	[key: string]: string;
-}
 
 interface Props {
 	images: Array<ImageModel>;
 	mainImage: string;
 	setMainImage: dispatcher<string>;
-	productStyles: ProductStyles;
+	productStyles: Styles;
 }
 
 const { Row } = Grid;

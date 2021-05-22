@@ -1,6 +1,8 @@
 import Meta from "./Meta";
 import Layout from "./Layout";
 import Nav from "./Nav";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
 import Cart from "./Cart";
 import Shop from "./Shop";
 import ShopItem from "./ShopItem";
@@ -12,6 +14,8 @@ const Components = {
 	Meta,
 	Layout,
 	Nav,
+	DesktopMenu,
+	MobileMenu,
 	Cart,
 	Shop,
 	ShopItem,

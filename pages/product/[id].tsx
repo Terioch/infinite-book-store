@@ -58,7 +58,7 @@ const product: React.FC<Props> = ({ product }) => {
 	};
 
 	return (
-		<Segment padded secondary>
+		<Segment basic padded secondary>
 			<Grid container centered stackable>
 				<Row columns={2}>
 					<Column width={6} textAlign="center">
