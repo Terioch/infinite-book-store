@@ -6,6 +6,7 @@ import Components from "./Components";
 import { Menu, Button, Icon } from "semantic-ui-react";
 
 const { Item } = Menu;
+const { Content } = Button;
 
 interface Props {
 	navStyles: Styles;
@@ -34,10 +35,19 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 		}
 	};
 
+	const cartTrigger = (
+		<Button animated="vertical" inverted color="grey">
+			<Content hidden>Cart</Content>
+			<Content visible>
+				<Icon name="cart" />
+			</Content>
+		</Button>
+	);
+
 	return (
 		<Item className={navStyles.rightMenu}>
-			<Item>
-				<Cart />
+			<Item fitted="horizontally">
+				<Cart cartTrigger={cartTrigger} />
 			</Item>
 			<Item fitted="horizontally">{handleAuthState()}</Item>
 			<Item>

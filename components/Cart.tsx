@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import client from "../client-methods/ClientMethods";
 import {
 	Modal,
@@ -8,30 +8,25 @@ import {
 	Segment,
 	Header,
 	Divider,
+	Item as SuiItem,
 } from "semantic-ui-react";
 
 const { Item } = Menu;
 const { Content } = Button;
 
-interface Props {}
+interface Props {
+	cartTrigger: any;
+}
 
-const Cart: React.FC<Props> = () => {
+const Cart: React.FC<Props> = ({ cartTrigger }) => {
 	const [displayCart, setDisplayCart] = useState(false);
 
 	const handleCartDisplay = () => setDisplayCart(!displayCart);
 
 	const trigger = (
-		<Button
-			animated="vertical"
-			inverted
-			color="grey"
-			onClick={handleCartDisplay}
-		>
-			<Content hidden>Cart</Content>
-			<Content visible>
-				<Icon name="cart" />
-			</Content>
-		</Button>
+		<SuiItem as="div" onClick={handleCartDisplay}>
+			{cartTrigger}
+		</SuiItem>
 	);
 
 	return (
