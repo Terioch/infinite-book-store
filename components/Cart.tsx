@@ -23,14 +23,13 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 
 	const handleCartDisplay = () => setDisplayCart(!displayCart);
 
-	const trigger = (
-		<SuiItem as="div" onClick={handleCartDisplay}>
-			{cartTrigger}
-		</SuiItem>
-	);
-
 	return (
-		<Modal centered trigger={trigger} open={displayCart}>
+		<Modal
+			centered
+			trigger={cartTrigger}
+			open={displayCart}
+			onOpen={handleCartDisplay}
+		>
 			<Segment basic>
 				<Menu borderless>
 					<Item>

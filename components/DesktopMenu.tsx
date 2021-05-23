@@ -46,7 +46,7 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 
 	return (
 		<Item className={navStyles.rightMenu}>
-			<Item fitted="horizontally">
+			<Item>
 				<Cart cartTrigger={cartTrigger} />
 			</Item>
 			<Item fitted="horizontally">{handleAuthState()}</Item>

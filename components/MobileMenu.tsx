@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Styles } from "../models/Styles";
 import client from "../client-methods/ClientMethods";
+import Components from "./Components";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const { Item } = Menu;
@@ -11,9 +12,17 @@ interface Props {
 }
 
 const MobileMenu: React.FC<Props> = ({ navStyles }) => {
+	const { Cart } = Components;
 	const [visible, setVisible] = useState(false);
 
 	const handleVisibility = () => setVisible(!visible);
+
+	const cartTrigger = (
+		<Item link>
+			<Icon name="cart" />
+			Cart
+		</Item>
+	);
 
 	return (
 		<>
@@ -42,10 +51,7 @@ const MobileMenu: React.FC<Props> = ({ navStyles }) => {
 						Home
 					</Item>
 				</Link>
-				<Item link>
-					<Icon name="cart" />
-					Cart
-				</Item>
+				<Cart cartTrigger={cartTrigger} />
 				<Link href="/login">
 					<Item link>
 						<Icon name="sign in" />
