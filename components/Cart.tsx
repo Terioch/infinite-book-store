@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Cart as CartModel } from "../models/Cart";
 import client from "../client-methods/ClientMethods";
+import Components from "./Components";
 import {
 	Modal,
 	Menu,
@@ -8,20 +10,28 @@ import {
 	Segment,
 	Header,
 	Divider,
-	Item as SuiItem,
 } from "semantic-ui-react";
 
 const { Item } = Menu;
-const { Content } = Button;
 
 interface Props {
 	cartTrigger: any;
 }
 
 const Cart: React.FC<Props> = ({ cartTrigger }) => {
+	const { CartItem } = Components;
+	const [cart, setCart] = useState<CartModel>(null);
 	const [displayCart, setDisplayCart] = useState(false);
 
 	const handleCartDisplay = () => setDisplayCart(!displayCart);
+
+	// Retrieve the current cart from storage
+	useEffect(() => {
+		const cart = JSON.parse(localStorage.getItem("cart"));
+		if (cart) setCart(cart);
+	}, [displayCart]);
+
+	console.log(cart?.lineItems);
 
 	return (
 		<Modal
@@ -50,7 +60,14 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 				</Menu>
 			</Segment>
 			<Segment basic textAlign="center">
-				<Header as="h3">Your shopping cart is empty</Header>
+				{/* Render the cart line items or a message if cart is empty */}
+				{cart ? (
+					cart?.lineItems.map((item, idx) => (
+						<CartItem key={idx} item={item} />
+					))
+				) : (
+					<Header as="h3">Your shopping cart is empty</Header>
+				)}
 			</Segment>
 			<Divider />
 			<Segment basic textAlign="center">
