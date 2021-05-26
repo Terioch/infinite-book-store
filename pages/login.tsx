@@ -9,6 +9,7 @@ import {
 	Checkbox,
 	Button,
 	Container,
+	List,
 	Message,
 	InputOnChangeData,
 	CheckboxProps,
@@ -169,15 +170,10 @@ const contact: React.FC = () => {
 							} with your sign-in attempt`}
 							list={errorList}
 						/>
-						<Container textAlign="center">
-							<Button
-								type="submit"
-								size="large"
-								color="blue"
-								onClick={e => handleSubmit(e)}
-							>
-								Create Account
-							</Button>
+						<Container
+							className={loginStyles.btnContainer}
+							textAlign="center"
+						>
 							<Button
 								type="submit"
 								size="large"
@@ -185,6 +181,15 @@ const contact: React.FC = () => {
 								onClick={e => handleSubmit(e)}
 							>
 								Login
+							</Button>
+							<Button
+								className={loginStyles.btn}
+								type="submit"
+								size="large"
+								color="blue"
+								onClick={e => handleSubmit(e)}
+							>
+								Create Account
 							</Button>
 						</Container>
 					</Form>
