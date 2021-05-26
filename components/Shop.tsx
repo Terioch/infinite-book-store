@@ -12,7 +12,6 @@ interface Props {
 
 const Shop: React.FC<Props> = ({ products }) => {
 	const { MobileShopItem, DesktopShopItem } = Components;
-	const { bookTitle, cursorPointer } = shopStyles;
 	const { screenWidth } = useScreenSize();
 
 	return (
