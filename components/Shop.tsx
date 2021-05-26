@@ -26,7 +26,7 @@ const Shop: React.FC<Props> = ({ products }) => {
 								style={{ backgroundColor: "#fff" }}
 							>
 								<Grid columns={2}>
-									{screenWidth < 390 ? (
+									{screenWidth < 375 ? (
 										<MobileShopItem
 											product={product}
 											shopStyles={shopStyles}

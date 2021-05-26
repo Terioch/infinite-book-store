@@ -17,10 +17,6 @@ const DesktopShopItem: React.FC<Props> = ({ product, shopStyles }) => {
 	const { id, title, images, variants } = product;
 	const { screenWidth } = useScreenSize();
 
-	const handleTextSize = () => {
-		// TODO
-	};
-
 	return (
 		<Row>
 			<Link href={`/product/${id}`}>
@@ -37,7 +33,7 @@ const DesktopShopItem: React.FC<Props> = ({ product, shopStyles }) => {
 				<Link href={`/product/${id}`}>
 					<Header
 						className={`${bookTitle} ${cursorPointer}`}
-						size={screenWidth < 468 ? "small" : "medium"}
+						size={screenWidth < 468 ? "tiny" : "medium"}
 					>
 						{title}
 					</Header>
