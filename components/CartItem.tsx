@@ -44,7 +44,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 								<Header size="medium">£{price}</Header>
 							</Item>
 							<Item>
-								<Header size="medium">Quantity: {quantity}</Header>
+								<Header size="medium">Qty: {quantity}</Header>
 							</Item>
 						</List>
 					</Column>
