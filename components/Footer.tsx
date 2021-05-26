@@ -2,21 +2,12 @@ import React from "react";
 import Link from "next/link";
 import client from "../client-methods/ClientMethods";
 import { useAuth } from "../contexts/authContext";
-import { useScreenSize } from "../contexts/screenSizeContext";
 import { Segment, Menu } from "semantic-ui-react";
 import footerStyles from "../styles/Footer.module.css";
 
 const Footer: React.FC = () => {
-	const { container, menu, stick } = footerStyles;
+	const { container, menu } = footerStyles;
 	const { user } = useAuth();
-	const { screenHeight, screenWidth } = useScreenSize();
-
-	// Position footer at bottom of page if both screen height and width are sufficiently great
-	const handleFooterPosition = () => {
-		if (screenHeight >= 1024 && screenWidth >= 768) {
-			return stick;
-		}
-	};
 
 	// Conditionally render sign-in/sign-out item
 	const handleAuthState = () => {
@@ -36,11 +27,7 @@ const Footer: React.FC = () => {
 	};
 
 	return (
-		<Segment
-			className={`${container} ${handleFooterPosition()}`}
-			basic
-			inverted
-		>
+		<Segment className={container} basic inverted>
 			<Menu className={menu} inverted fluid compact>
 				<Link href="/">
 					<Menu.Item as="a">Shop</Menu.Item>
