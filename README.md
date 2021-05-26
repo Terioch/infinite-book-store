@@ -4,12 +4,8 @@ A book store built in NextJS, Shopify, Firebase and Semantic-ui.
 
 ## General Information
 
-Products are fetched through the Shopify Storefront API using the
-Javascript-Buy-SDK library. User authentication was implemented using
-firebase.
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Products are fetched through the Shopify Storefront API using GraphQL and
+user sign-in authentication was implemented using firebase.
 
 ## Launch
 
