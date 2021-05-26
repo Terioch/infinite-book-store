@@ -1,6 +1,6 @@
 import React from "react";
 import { LineItem } from "../models/Cart";
-import { Divider, Header, List, Grid, Image } from "semantic-ui-react";
+import { Segment, Header, List, Grid, Image } from "semantic-ui-react";
 import cartStyles from "../styles/Cart.module.css";
 
 const { Item } = List;
@@ -18,28 +18,39 @@ const CartItem: React.FC<Props> = ({ item }) => {
 	} = item;
 
 	return (
-		<>
-			<Grid columns={2} padded="vertically" centered relaxed>
+		<Segment>
+			<Grid
+				columns={2}
+				padded="vertically"
+				stackable={false}
+				centered
+				relaxed
+			>
 				<Row>
-					<Column width={4}>
+					<Column width={4} mobile={6}>
 						<Image src={image.src} size="tiny" centered />
 					</Column>
-					<Column width={6} verticalAlign="middle" textAlign="left">
-						<Header as="h3" color="blue">
+					<Column
+						width={6}
+						mobile={10}
+						verticalAlign="middle"
+						textAlign="left"
+					>
+						<Header size="medium" color="blue">
 							{title}
 						</Header>
 						<List horizontal>
 							<Item>
-								<Header as="h3">£{price}</Header>
+								<Header size="medium">£{price}</Header>
 							</Item>
 							<Item>
-								<Header as="h3">Quantity: {quantity}</Header>
+								<Header size="medium">Quantity: {quantity}</Header>
 							</Item>
 						</List>
 					</Column>
 				</Row>
 			</Grid>
-		</>
+		</Segment>
 	);
 };
 

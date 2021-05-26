@@ -22,7 +22,11 @@ const Nav: React.FC<MenuItemProps> = () => {
 			<Menu className={menu} fluid borderless color="black" inverted>
 				<Link href="/">
 					<Item>
-						<Header className={title} as="h1" color="blue">
+						<Header
+							className={title}
+							size={screenWidth < 468 ? "medium" : "huge"}
+							color="blue"
+						>
 							Infinite Book Store
 							<Icon name="bolt" color="grey" />
 						</Header>

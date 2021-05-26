@@ -6,7 +6,8 @@ import MobileMenu from "./MobileMenu";
 import Cart from "./Cart";
 import CartItem from "./CartItem";
 import Shop from "./Shop";
-import ShopItem from "./ShopItem";
+import MobileShopItem from "./MobileShopItem";
+import DesktopShopItem from "./DesktopShopItem";
 import ProductImageColumn from "./ProductImageColumn";
 import ProductInfoColumn from "./ProductInfoColumn";
 import Footer from "./Footer";
@@ -20,7 +21,8 @@ const Components = {
 	Cart,
 	CartItem,
 	Shop,
-	ShopItem,
+	MobileShopItem,
+	DesktopShopItem,
 	ProductImageColumn,
 	ProductInfoColumn,
 	Footer,

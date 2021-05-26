@@ -31,8 +31,6 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 		if (cart) setCart(cart);
 	}, [displayCart]);
 
-	console.log(cart?.lineItems);
-
 	return (
 		<Modal
 			centered
