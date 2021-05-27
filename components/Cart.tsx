@@ -31,6 +31,15 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 		if (cart) setCart(cart);
 	}, [displayCart]);
 
+	// Remove requested cart item from state and storage
+	const handleCartItemRemoval = (id: string) => {
+		const filteredCart = { ...cart };
+		filteredCart.lineItems = cart.lineItems.filter(item => item.id !== id);
+		setCart(filteredCart);
+		localStorage.setItem("cart", JSON.stringify(filteredCart));
+		localStorage.removeItem("checkoutId");
+	};
+
 	return (
 		<Modal
 			centered
@@ -61,7 +70,11 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 				{/* Render the cart line items or a message if cart is empty */}
 				{cart ? (
 					cart?.lineItems.map((item, idx) => (
-						<CartItem key={idx} item={item} />
+						<CartItem
+							key={idx}
+							item={item}
+							handleCartItemRemoval={handleCartItemRemoval}
+						/>
 					))
 				) : (
 					<Header as="h3">Your shopping cart is empty</Header>

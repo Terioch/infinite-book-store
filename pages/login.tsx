@@ -177,19 +177,19 @@ const contact: React.FC = () => {
 							<Button
 								type="submit"
 								size="large"
-								color="black"
+								color="blue"
 								onClick={e => handleSubmit(e)}
 							>
-								Login
+								Create Account
 							</Button>
 							<Button
 								className={loginStyles.btn}
 								type="submit"
 								size="large"
-								color="blue"
+								color="black"
 								onClick={e => handleSubmit(e)}
 							>
-								Create Account
+								Login
 							</Button>
 						</Container>
 					</Form>

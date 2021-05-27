@@ -1,6 +1,14 @@
 import React from "react";
 import { LineItem } from "../models/Cart";
-import { Segment, Header, List, Grid, Image } from "semantic-ui-react";
+import {
+	Segment,
+	Header,
+	List,
+	Grid,
+	Menu,
+	Image,
+	Icon,
+} from "semantic-ui-react";
 import cartStyles from "../styles/Cart.module.css";
 
 const { Item } = List;
@@ -8,9 +16,10 @@ const { Row, Column } = Grid;
 
 interface Props {
 	item: LineItem;
+	handleCartItemRemoval: (id: string) => void;
 }
 
-const CartItem: React.FC<Props> = ({ item }) => {
+const CartItem: React.FC<Props> = ({ item, handleCartItemRemoval }) => {
 	const {
 		title,
 		quantity,
@@ -18,7 +27,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 	} = item;
 
 	return (
-		<Segment>
+		<Segment className={cartStyles.segment}>
 			<Grid
 				columns={2}
 				padded="vertically"
@@ -26,6 +35,24 @@ const CartItem: React.FC<Props> = ({ item }) => {
 				centered
 				relaxed
 			>
+				<Menu
+					as={Segment}
+					floated="right"
+					borderless
+					icon
+					basic
+					fluid
+					style={{ paddingTop: "0" }}
+				>
+					<Menu.Item fitted position="right">
+						<Icon
+							name="minus circle"
+							size="large"
+							link
+							onClick={() => handleCartItemRemoval(item.id)}
+						/>
+					</Menu.Item>
+				</Menu>
 				<Row>
 					<Column width={4} mobile={6}>
 						<Image src={image.src} size="tiny" centered />

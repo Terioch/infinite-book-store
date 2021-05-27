@@ -6,7 +6,6 @@ import Components from "../../components/Components";
 import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
 
-const { fetchAll, fetchOne } = client.product;
 const { Row, Column } = Grid;
 
 interface Props {
