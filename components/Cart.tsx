@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Components from "./Components";
 import { Cart as CartModel } from "../models/Cart";
 import client from "../client-methods/ClientMethods";
 import { client as Client } from "../utils/shopify";
-import Components from "./Components";
+import { useCheckoutDisabled } from "../contexts/checkoutDisabledContext";
 import {
 	Modal,
 	Menu,
@@ -23,20 +24,21 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 	const { CartItem } = Components;
 	const [cart, setCart] = useState<CartModel>(null);
 	const [displayCart, setDisplayCart] = useState(false);
+	const { checkoutDisabled, handleCheckoutDisabled } =
+		useCheckoutDisabled();
 
 	const handleCartDisplay = () => setDisplayCart(!displayCart);
 
-	// Set the current cart from storage and checkout disabled state
+	// Set checkout disabled state
+	useEffect(() => {
+		handleCheckoutDisabled();
+	});
+
+	// Set the current cart from storage
 	useEffect(() => {
 		const cart = JSON.parse(localStorage.getItem("cart"));
 		if (cart) setCart(cart);
 	}, [displayCart]);
-
-	// Set disabled state of checkout button
-	const setCheckoutDisabled = (): boolean => {
-		if (cart?.lineItems.length > 0) return false;
-		return true;
-	};
 
 	// Remove requested cart item from state and storage
 	const handleCartItemRemoval = async (id: string) => {
@@ -93,7 +95,7 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 			<Segment basic textAlign="center">
 				<Button
 					circular
-					disabled={setCheckoutDisabled()}
+					disabled={checkoutDisabled}
 					size="big"
 					color="black"
 					onClick={client.checkoutItems}

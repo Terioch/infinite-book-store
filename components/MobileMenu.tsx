@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Styles } from "../models/Styles";
-import client from "../client-methods/ClientMethods";
 import Components from "./Components";
+import client from "../client-methods/ClientMethods";
+import { useCheckoutDisabled } from "../contexts/checkoutDisabledContext";
 import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const { Item } = Menu;
@@ -14,6 +15,7 @@ interface Props {
 const MobileMenu: React.FC<Props> = ({ navStyles }) => {
 	const { Cart } = Components;
 	const [visible, setVisible] = useState(false);
+	const { checkoutDisabled } = useCheckoutDisabled();
 
 	const handleVisibility = () => setVisible(!visible);
 
@@ -58,7 +60,11 @@ const MobileMenu: React.FC<Props> = ({ navStyles }) => {
 						Sign In
 					</Item>
 				</Link>
-				<Item link onClick={client.checkoutItems}>
+				<Item
+					link
+					onClick={client.checkoutItems}
+					//disabled={checkoutDisabled}
+				>
 					<Icon name="arrow right" />
 					Checkout
 				</Item>

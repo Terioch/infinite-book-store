@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Components from "./Components";
 import { Styles } from "../models/Styles";
 import client from "../client-methods/ClientMethods";
 import { useAuth } from "../contexts/authContext";
-import Components from "./Components";
+import { useCheckoutDisabled } from "../contexts/checkoutDisabledContext";
 import { Menu, Button, Icon } from "semantic-ui-react";
 
 const { Item } = Menu;
@@ -15,6 +16,7 @@ interface Props {
 const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	const { Cart } = Components;
 	const { user } = useAuth();
+	const { checkoutDisabled } = useCheckoutDisabled();
 
 	// Conditionally render sign-in/sign-out button
 	const handleAuthState = () => {
@@ -46,6 +48,9 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 
 	return (
 		<Item className={navStyles.rightMenu}>
+			{/* <Item fitted="horizontally" icon>
+				<Icon name="home" size="large" link />
+			</Item> */}
 			<Item>
 				<Cart cartTrigger={cartTrigger} />
 			</Item>
@@ -56,6 +61,7 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 					labelPosition="right"
 					icon
 					color="green"
+					disabled={checkoutDisabled}
 					onClick={() => client.checkoutItems()}
 				>
 					<Icon name="arrow right" />

@@ -1,26 +1,32 @@
 import React from "react";
 import Link from "next/link";
+import Components from "./Components";
 import client from "../client-methods/ClientMethods";
 import { useAuth } from "../contexts/authContext";
 import { Segment, Menu } from "semantic-ui-react";
 import footerStyles from "../styles/Footer.module.css";
 
+const { Item } = Menu;
+const { container, menu } = footerStyles;
+
 const Footer: React.FC = () => {
-	const { container, menu } = footerStyles;
+	const { Cart } = Components;
 	const { user } = useAuth();
+
+	const cartTrigger = <Item link>Cart</Item>;
 
 	// Conditionally render sign-in/sign-out item
 	const handleAuthState = () => {
 		if (user) {
 			return (
-				<Menu.Item as="a" onClick={client.signOutUser}>
+				<Item as="a" onClick={client.signOutUser}>
 					Sign Out
-				</Menu.Item>
+				</Item>
 			);
 		} else {
 			return (
 				<Link href="/login">
-					<Menu.Item as="a">Sign In</Menu.Item>
+					<Item link>Sign In</Item>
 				</Link>
 			);
 		}
@@ -30,15 +36,13 @@ const Footer: React.FC = () => {
 		<Segment className={container} basic inverted>
 			<Menu className={menu} inverted fluid compact>
 				<Link href="/">
-					<Menu.Item as="a">Shop</Menu.Item>
+					<Item link>Home</Item>
 				</Link>
+				<Cart cartTrigger={cartTrigger} />
 				{handleAuthState()}
-				<Menu.Item as="a" onClick={() => client.checkoutItems()}>
-					Checkout
-				</Menu.Item>
 			</Menu>
 			<Menu inverted vertical text fluid>
-				<Menu.Item>Infinite Book Store | Copyright &copy; 2021</Menu.Item>
+				<Item>Infinite Book Store | Copyright &copy; 2021</Item>
 			</Menu>
 		</Segment>
 	);
