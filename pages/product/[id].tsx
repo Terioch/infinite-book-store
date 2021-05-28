@@ -30,7 +30,7 @@ const product: React.FC<Props> = ({ product }) => {
 
 		setPopupContent("Item successfully added to cart");
 
-		let checkoutId = localStorage.getItem("checkoutId");
+		let checkoutId = JSON.parse(localStorage.getItem("checkoutId"));
 
 		// Create new checkout if checkoutId was not fetched from session storage
 		if (!checkoutId) {

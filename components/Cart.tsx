@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Cart as CartModel } from "../models/Cart";
 import client from "../client-methods/ClientMethods";
+import { client as Client } from "../utils/shopify";
 import Components from "./Components";
 import {
 	Modal,
@@ -32,12 +33,14 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 	}, [displayCart]);
 
 	// Remove requested cart item from state and storage
-	const handleCartItemRemoval = (id: string) => {
-		const filteredCart = { ...cart };
-		filteredCart.lineItems = cart.lineItems.filter(item => item.id !== id);
-		setCart(filteredCart);
+	const handleCartItemRemoval = async (id: string) => {
+		const checkoutId = JSON.parse(localStorage.getItem("checkoutId"));
+		const filteredCart = await Client.checkout.removeLineItems(
+			checkoutId,
+			id
+		);
 		localStorage.setItem("cart", JSON.stringify(filteredCart));
-		localStorage.removeItem("checkoutId");
+		setCart(filteredCart);
 	};
 
 	return (
@@ -68,7 +71,7 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 			</Segment>
 			<Segment basic textAlign="center">
 				{/* Render the cart line items or a message if cart is empty */}
-				{cart ? (
+				{cart?.lineItems.length > 0 ? (
 					cart?.lineItems.map((item, idx) => (
 						<CartItem
 							key={idx}
