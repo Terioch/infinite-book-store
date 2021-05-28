@@ -26,11 +26,17 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 
 	const handleCartDisplay = () => setDisplayCart(!displayCart);
 
-	// Retrieve the current cart from storage
+	// Set the current cart from storage and checkout disabled state
 	useEffect(() => {
 		const cart = JSON.parse(localStorage.getItem("cart"));
 		if (cart) setCart(cart);
 	}, [displayCart]);
+
+	// Set disabled state of checkout button
+	const setCheckoutDisabled = (): boolean => {
+		if (cart?.lineItems.length > 0) return false;
+		return true;
+	};
 
 	// Remove requested cart item from state and storage
 	const handleCartItemRemoval = async (id: string) => {
@@ -39,7 +45,6 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 			checkoutId,
 			id
 		);
-		console.log(filteredCart);
 		localStorage.setItem("cart", JSON.stringify(filteredCart));
 		setCart(filteredCart);
 	};
@@ -88,6 +93,7 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 			<Segment basic textAlign="center">
 				<Button
 					circular
+					disabled={setCheckoutDisabled()}
 					size="big"
 					color="black"
 					onClick={client.checkoutItems}
