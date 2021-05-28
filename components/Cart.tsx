@@ -34,11 +34,12 @@ const Cart: React.FC<Props> = ({ cartTrigger }) => {
 
 	// Remove requested cart item from state and storage
 	const handleCartItemRemoval = async (id: string) => {
-		const checkoutId = JSON.parse(localStorage.getItem("checkoutId"));
+		const checkoutId = localStorage.getItem("checkoutId");
 		const filteredCart = await Client.checkout.removeLineItems(
 			checkoutId,
 			id
 		);
+		console.log(filteredCart);
 		localStorage.setItem("cart", JSON.stringify(filteredCart));
 		setCart(filteredCart);
 	};

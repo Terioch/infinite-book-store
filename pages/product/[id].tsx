@@ -30,15 +30,14 @@ const product: React.FC<Props> = ({ product }) => {
 
 		setPopupContent("Item successfully added to cart");
 
-		let checkoutId = JSON.parse(localStorage.getItem("checkoutId"));
+		let checkoutId = localStorage.getItem("checkoutId");
 
-		// Create new checkout if checkoutId was not fetched from session storage
+		// Create new checkout if checkoutId was not fetched from local storage
 		if (!checkoutId) {
 			const checkout = await Client.checkout.create();
 			checkoutId = checkout.id;
+			localStorage.setItem("checkoutId", checkoutId);
 		}
-
-		localStorage.setItem("checkoutId", checkoutId);
 
 		// Add line items to checkout cart
 		const cart = await Client.checkout.addLineItems(checkoutId, [
