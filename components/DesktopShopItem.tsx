@@ -33,6 +33,7 @@ const DesktopShopItem: React.FC<Props> = ({ product, shopStyles }) => {
 				<Link href={`/product/${id}`}>
 					<Header
 						className={`${bookTitle} ${cursorPointer}`}
+						as="a"
 						size={screenWidth < 468 ? "tiny" : "medium"}
 					>
 						{title}

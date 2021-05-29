@@ -1,8 +1,9 @@
 import { useState } from "react";
+import Components from "../../components/Components";
+import { Product } from "../../models/ProductSDK";
 import { client as Client } from "../../utils/shopify";
 import client from "../../client-methods/ClientMethods";
-import { Product } from "../../models/ProductSDK";
-import Components from "../../components/Components";
+import { useCheckoutDisabled } from "../../contexts/checkoutDisabledContext";
 import { Segment, Grid } from "semantic-ui-react";
 import productStyles from "../../styles/product.module.css";
 
@@ -15,6 +16,7 @@ interface Props {
 const product: React.FC<Props> = ({ product }) => {
 	const { ProductImageColumn, ProductInfoColumn } = Components;
 	const { images, variants } = product;
+	const { handleCheckoutDisabled } = useCheckoutDisabled();
 
 	const [mainImage, setMainImage] = useState(images[0].src);
 	const [quantity, setQuantity] = useState<number | string>(1);
@@ -48,6 +50,7 @@ const product: React.FC<Props> = ({ product }) => {
 		]);
 
 		localStorage.setItem("cart", JSON.stringify(cart));
+		handleCheckoutDisabled();
 	};
 
 	const handleQuantity = (e: any) => {

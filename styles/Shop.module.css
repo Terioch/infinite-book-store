@@ -3,5 +3,6 @@
 }
 
 .bookTitle:hover {
-	color: #866846 !important;
+	/* color: #866846 !important; */
+	color: #2cc33d !important;
 }
