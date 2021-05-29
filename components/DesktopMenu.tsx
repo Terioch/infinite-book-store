@@ -22,7 +22,12 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	const handleAuthState = () => {
 		if (user) {
 			return (
-				<Button animated onClick={client.signOutUser}>
+				<Button
+					inverted
+					animated
+					color="blue"
+					onClick={client.signOutUser}
+				>
 					<Content visible>Sign Out</Content>
 					<Content hidden>
 						<Icon name="sign out" />
@@ -32,7 +37,7 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 		}
 		return (
 			<Link href="/login">
-				<Button animated>
+				<Button inverted animated color="blue">
 					<Content visible>Sign In</Content>
 					<Content hidden>
 						<Icon name="sign in" />
@@ -43,7 +48,7 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	};
 
 	const cartTrigger = (
-		<Button animated="vertical">
+		<Button inverted animated="vertical" color="grey">
 			<Content hidden>Cart</Content>
 			<Content visible>
 				<Icon name="cart" />
@@ -54,54 +59,29 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	return (
 		<Menu className={navStyles.rightMenu} inverted compact>
 			<Item fitted="horizontally">
-				<Button.Group>
-					<Button icon>
-						<Icon name="home" />
-					</Button>
-					<Cart cartTrigger={cartTrigger} />
-					{handleAuthState()}
-					<Button
-						inverted
-						labelPosition="right"
-						icon
-						color="green"
-						disabled={checkoutDisabled}
-						onClick={() => client.checkoutItems()}
-					>
-						<Icon name="arrow right" />
-						Checkout
-					</Button>
-				</Button.Group>
+				<Button icon inverted>
+					<Icon name="home" />
+				</Button>
+			</Item>
+			<Item>
+				<Cart cartTrigger={cartTrigger} />
+			</Item>
+			<Item fitted="horizontally">{handleAuthState()}</Item>
+			<Item>
+				<Button
+					inverted
+					icon
+					labelPosition="right"
+					color="green"
+					disabled={checkoutDisabled}
+					onClick={() => client.checkoutItems()}
+				>
+					<Icon name="arrow right" />
+					Checkout
+				</Button>
 			</Item>
 		</Menu>
 	);
 };
 
 export default DesktopMenu;
-
-{
-	/* <Menu className={navStyles.rightMenu} inverted compact>
-	<Item fitted="horizontally">
-		<Button icon color="black">
-			<Icon name="home" />
-		</Button>
-	</Item>
-	<Item>
-		<Cart cartTrigger={cartTrigger} />
-	</Item>
-	<Item fitted="horizontally">{handleAuthState()}</Item>
-	<Item>
-		<Button
-			inverted
-			labelPosition="right"
-			icon
-			color="green"
-			disabled={checkoutDisabled}
-			onClick={() => client.checkoutItems()}
-		>
-			<Icon name="arrow right" />
-			Checkout
-		</Button>
-	</Item>
-</Menu> */
-}

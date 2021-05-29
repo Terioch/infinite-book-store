@@ -59,7 +59,7 @@ const product: React.FC<Props> = ({ product }) => {
 	};
 
 	return (
-		<Segment basic padded secondary>
+		<Segment className={productStyles.container} basic padded secondary>
 			<Grid container centered stackable>
 				<Row columns={2}>
 					<Column width={6} textAlign="center">
