@@ -1,14 +1,7 @@
 import Link from "next/link";
 import { Product } from "../models/ProductSDK";
 import MyPopup from "./Popup";
-import {
-	Header,
-	Input,
-	Divider,
-	Segment,
-	List,
-	Container,
-} from "semantic-ui-react";
+import { Header, Input, Divider, Segment, List } from "semantic-ui-react";
 
 const { Item } = List;
 

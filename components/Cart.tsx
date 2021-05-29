@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Components from "./Components";
-import { Cart as CartModel } from "../models/Cart";
 import client from "../client-methods/ClientMethods";
 import { client as Client } from "../utils/shopify";
+import { Cart as CartModel } from "../models/Cart";
 import { useCheckoutDisabled } from "../contexts/checkoutDisabledContext";
 import {
 	Modal,

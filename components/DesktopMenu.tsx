@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Components from "./Components";
+import Contexts from "../contexts/Contexts";
 import { Styles } from "../models/Styles";
 import client from "../client-methods/ClientMethods";
-import { useAuth } from "../contexts/authContext";
-import { useCheckoutDisabled } from "../contexts/checkoutDisabledContext";
 import { Menu, Button, Icon } from "semantic-ui-react";
 
 const { Item } = Menu;
@@ -15,8 +14,8 @@ interface Props {
 
 const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	const { Cart } = Components;
-	const { user } = useAuth();
-	const { checkoutDisabled } = useCheckoutDisabled();
+	const { user } = Contexts.useAuth();
+	const { checkoutDisabled } = Contexts.useCheckoutDisabled();
 
 	// Conditionally render sign-in/sign-out button
 	const handleAuthState = () => {
