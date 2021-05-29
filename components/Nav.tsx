@@ -20,8 +20,8 @@ const Nav: React.FC<MenuItemProps> = () => {
 	return (
 		<Segment basic inverted padded>
 			<Menu className={menu} fluid borderless color="black" inverted>
-				<Link href="/">
-					<Item>
+				<Item>
+					<Link href="/">
 						<Header
 							className={title}
 							size={screenWidth < 468 ? "medium" : "huge"}
@@ -30,8 +30,8 @@ const Nav: React.FC<MenuItemProps> = () => {
 							Infinite Book Store
 							<Icon name="bolt" color="grey" />
 						</Header>
-					</Item>
-				</Link>
+					</Link>
+				</Item>
 				{screenWidth < 968 ? (
 					<MobileMenu navStyles={navStyles} />
 				) : (
