@@ -59,9 +59,11 @@ const DesktopMenu: React.FC<Props> = ({ navStyles }) => {
 	return (
 		<Menu className={navStyles.rightMenu} inverted compact>
 			<Item fitted="horizontally">
-				<Button icon inverted>
-					<Icon name="home" />
-				</Button>
+				<Link href="/">
+					<Button icon inverted>
+						<Icon name="home" />
+					</Button>
+				</Link>
 			</Item>
 			<Item>
 				<Cart cartTrigger={cartTrigger} />
